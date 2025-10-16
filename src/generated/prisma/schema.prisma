@@ -1,0 +1,422 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model tb_arquivo {
+  id               BigInt           @id @default(autoincrement())
+  id_conta         BigInt
+  owner_tipo       String           @db.VarChar(20)
+  owner_id         BigInt
+  tipo             String           @db.VarChar(30)
+  titulo           String?          @db.VarChar(300)
+  url              String?          @db.VarChar(3000)
+  conteudo         Bytes?
+  dt_inc           DateTime         @default(now()) @db.Timestamptz(6)
+  tb_sistema_conta tb_sistema_conta @relation(fields: [id_conta], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_arquivo_conta")
+
+  @@index([owner_tipo, owner_id], map: "idx_arquivo_owner")
+}
+
+model tb_categoria {
+  id                    BigInt                  @id @default(autoincrement())
+  id_conta              BigInt
+  nome                  String                  @db.VarChar(200)
+  dt_inc                DateTime                @default(now()) @db.Timestamptz(6)
+  tb_sistema_conta      tb_sistema_conta        @relation(fields: [id_conta], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_categoria_conta")
+  tb_fornecedor_produto tb_fornecedor_produto[]
+
+  @@unique([id_conta, nome], map: "uq_categoria_conta_nome")
+}
+
+model tb_documento_fiscal {
+  id               BigInt           @id @default(autoincrement())
+  id_conta         BigInt
+  id_loja          BigInt
+  id_fornecedor    BigInt
+  numero           String?          @db.VarChar(20)
+  serie            String?          @db.VarChar(10)
+  chave_nfe        String?          @unique(map: "uq_docfiscal_chave") @db.VarChar(44)
+  dt_emissao       DateTime?        @db.Date
+  valor_produtos   Decimal?         @db.Decimal(14, 2)
+  xml_texto        String?
+  arquivo          Bytes?
+  dt_inc           DateTime         @default(now()) @db.Timestamptz(6)
+  tb_sistema_conta tb_sistema_conta @relation(fields: [id_conta], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_docfiscal_conta")
+  tb_fornecedor    tb_fornecedor    @relation(fields: [id_fornecedor], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_docfiscal_fornecedor")
+  tb_loja          tb_loja          @relation(fields: [id_loja], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_docfiscal_loja")
+}
+
+model tb_fornecedor {
+  id                        BigInt                      @id @default(autoincrement())
+  id_conta                  BigInt
+  id_usuario                BigInt
+  dt_inc                    DateTime                    @default(now()) @db.Timestamptz(6)
+  razao_social              String?                     @db.VarChar(500)
+  nome_fantasia             String?                     @db.VarChar(500)
+  inscricao_estadual        String?                     @db.VarChar(20)
+  tipo_classificacao        String?                     @db.VarChar(200)
+  observacoes               String?                     @db.VarChar(2000)
+  cnpj                      String?                     @unique(map: "uq_fornecedor_cnpj") @db.VarChar(20)
+  email_fornecedor          String                      @db.VarChar(200)
+  email_nfe                 String?                     @db.VarChar(200)
+  telefone                  String?                     @db.VarChar(20)
+  site                      String?                     @db.VarChar(200)
+  foto                      Bytes?
+  ativo                     Boolean?                    @default(true)
+  tb_documento_fiscal       tb_documento_fiscal[]
+  tb_sistema_conta          tb_sistema_conta            @relation(fields: [id_conta], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_fornecedor_conta")
+  tb_sistema_usuario        tb_sistema_usuario          @relation(fields: [id_usuario], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_fornecedor_usuario")
+  tb_fornecedor_campanha    tb_fornecedor_campanha[]
+  tb_fornecedor_condicao    tb_fornecedor_condicao[]
+  tb_fornecedor_contato     tb_fornecedor_contato[]
+  tb_fornecedor_endereco    tb_fornecedor_endereco[]
+  tb_fornecedor_produto     tb_fornecedor_produto[]
+  tb_loja_cashback          tb_loja_cashback[]
+  tb_loja_cashback_detalhes tb_loja_cashback_detalhes[]
+  tb_pedido                 tb_pedido[]
+  tb_pedido_item            tb_pedido_item[]
+
+  @@index([cnpj], map: "idx_fornecedor_cnpj")
+}
+
+model tb_fornecedor_campanha {
+  id                              BigInt                           @id @default(autoincrement())
+  id_fornecedor                   BigInt
+  id_usuario                      BigInt
+  id_conta                        BigInt
+  descricao_campanha              String                           @db.VarChar(2000)
+  valor_meta                      Decimal?                         @db.Decimal(14, 2)
+  tempo_duracao_campanha          Int?
+  foto                            Bytes?
+  dt_inc                          DateTime                         @default(now()) @db.Timestamptz(6)
+  valor_atingido                  Decimal?                         @db.Decimal(14, 2)
+  quantidade_meta                 Int?                             @default(0)
+  quantidade_atingida             Int?                             @default(0)
+  tipo                            String?                          @db.VarChar(20)
+  dt_inicio                       DateTime?                        @db.Timestamptz(6)
+  dt_fim                          DateTime?                        @db.Timestamptz(6)
+  ativa                           Boolean?                         @default(true)
+  pedido_minimo                   Decimal?                         @db.Decimal(14, 2)
+  tem_meta_global                 Boolean?                         @default(false)
+  status                          String?                          @db.VarChar(20)
+  bloquear_pedidos_se_nao_atingir Boolean?                         @default(false)
+  percentual_cashback_campanha    Decimal?                         @db.Decimal(5, 2)
+  tb_sistema_conta                tb_sistema_conta                 @relation(fields: [id_conta], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_campanha_conta")
+  tb_fornecedor                   tb_fornecedor                    @relation(fields: [id_fornecedor], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_campanha_fornecedor")
+  tb_sistema_usuario              tb_sistema_usuario               @relation(fields: [id_usuario], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_campanha_usuario")
+  tb_fornecedor_campanha_produto  tb_fornecedor_campanha_produto[]
+  tb_pedido_item                  tb_pedido_item[]
+}
+
+model tb_fornecedor_campanha_produto {
+  id                     BigInt                 @id @default(autoincrement())
+  id_conta               BigInt
+  id_usuario             BigInt
+  id_campanha            BigInt
+  id_produto             BigInt
+  dt_inc                 DateTime               @default(now()) @db.Timestamptz(6)
+  preco_promocional      Decimal?               @db.Decimal(14, 2)
+  tb_fornecedor_campanha tb_fornecedor_campanha @relation(fields: [id_campanha], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_campanha_produto_campanha")
+  tb_fornecedor_produto  tb_fornecedor_produto  @relation(fields: [id_produto], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_campanha_produto_produto")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model tb_fornecedor_condicao {
+  id                          BigInt             @id @default(autoincrement())
+  id_fornecedor               BigInt
+  id_conta                    BigInt
+  id_usuario                  BigInt
+  dt_inc                      DateTime           @default(now()) @db.Timestamptz(6)
+  pedido_minimo               Decimal?           @db.Decimal(14, 2)
+  pedido_minimo_frete_cif     Decimal?           @db.Decimal(14, 2)
+  prazo_entrega               Int?
+  valor_desconto_a_vista      Decimal?           @db.Decimal(14, 2)
+  percentual_desconto_a_vista Decimal?           @db.Decimal(5, 2)
+  observacoes                 String?            @db.VarChar(500)
+  percentual_cashback         Decimal?           @db.Decimal(5, 2)
+  condicao_especial           String?            @db.VarChar(2000)
+  politica_devolucao          String?            @db.VarChar(2000)
+  estado                      String?            @default("--") @db.Char(2)
+  prazo_pagamento             String?            @db.VarChar(2000)
+  prazo_pagamento_dias        Int?
+  prazo_pagamento_json        Json?
+  ajuste_unitario             Decimal?           @db.Decimal(14, 2)
+  link_catalogo               String?            @db.VarChar(3000)
+  tb_sistema_conta            tb_sistema_conta   @relation(fields: [id_conta], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_condicao_conta")
+  tb_fornecedor               tb_fornecedor      @relation(fields: [id_fornecedor], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_condicao_fornecedor")
+  tb_sistema_usuario          tb_sistema_usuario @relation(fields: [id_usuario], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_condicao_usuario")
+
+  @@unique([id_fornecedor, estado], map: "uq_fornecedor_condicao_fornecedor_estado")
+  @@index([id_fornecedor, estado], map: "idx_fornecedor_condicao_estado")
+}
+
+model tb_fornecedor_contato {
+  id                 BigInt        @id @default(autoincrement())
+  id_fornecedor      BigInt
+  nome               String        @db.VarChar(200)
+  email              String?       @db.VarChar(200)
+  fone1              String?       @db.VarChar(20)
+  fone2              String?       @db.VarChar(20)
+  is_responsavel     Boolean?
+  id_usuario         BigInt
+  id_conta           BigInt
+  dt_inc             DateTime      @default(now()) @db.Timestamptz(6)
+  outras_informacoes String?       @db.VarChar(1000)
+  tb_fornecedor      tb_fornecedor @relation(fields: [id_fornecedor], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_fornecedor_contato_fornecedor")
+
+  @@index([id_fornecedor], map: "idx_fornecedor_contato_fornecedor")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model tb_fornecedor_endereco {
+  id            BigInt        @id @default(autoincrement())
+  id_fornecedor BigInt
+  logradouro    String        @db.VarChar(200)
+  numero        String?       @db.VarChar(10)
+  bairro        String?       @db.VarChar(100)
+  cidade        String?       @db.VarChar(100)
+  estado        String?       @db.Char(2)
+  cep           String        @db.VarChar(10)
+  id_usuario    BigInt
+  id_conta      BigInt
+  dt_inc        DateTime      @default(now()) @db.Timestamptz(6)
+  pais          String?       @db.VarChar(100)
+  tb_fornecedor tb_fornecedor @relation(fields: [id_fornecedor], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_fornecedor_endereco_fornecedor")
+
+  @@index([id_fornecedor], map: "idx_fornecedor_endereco_fornecedor")
+}
+
+model tb_fornecedor_produto {
+  id                             BigInt                           @id @default(autoincrement())
+  id_fornecedor                  BigInt
+  id_usuario                     BigInt
+  id_conta                       BigInt
+  id_categoria                   BigInt?
+  codigo_produto                 String?                          @db.VarChar(20)
+  produto                        String                           @db.VarChar(200)
+  gtin                           String?                          @db.VarChar(20)
+  codigo_referencia              String?                          @db.VarChar(20)
+  tipo_embalagem                 String?                          @db.VarChar(20)
+  valor_produto                  Decimal                          @db.Decimal(14, 2)
+  foto                           Bytes?
+  dt_inc                         DateTime                         @default(now()) @db.Timestamptz(6)
+  tb_fornecedor_campanha_produto tb_fornecedor_campanha_produto[]
+  tb_categoria                   tb_categoria?                    @relation(fields: [id_categoria], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_fornecedor_produto_categoria")
+  tb_fornecedor                  tb_fornecedor                    @relation(fields: [id_fornecedor], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_fornecedor_produto_fornecedor")
+  tb_pedido_item                 tb_pedido_item[]
+
+  @@unique([id_fornecedor, codigo_produto], map: "uq_fornecedor_produto_codigo")
+  @@unique([id_fornecedor, produto], map: "uq_fornecedor_produto_nome")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model tb_loja {
+  id                        BigInt                      @id @default(autoincrement())
+  cnpj                      String                      @unique(map: "uq_loja_cnpj") @db.VarChar(20)
+  nome_fantasia             String                      @db.VarChar(500)
+  razao_social              String?                     @db.VarChar(500)
+  inscricao_estadual        String?                     @db.VarChar(50)
+  id_usuario                BigInt
+  id_conta                  BigInt
+  dt_inc                    DateTime                    @default(now()) @db.Timestamptz(6)
+  email_loja                String?                     @db.VarChar(200)
+  email_nfe                 String?                     @db.VarChar(200)
+  site                      String?                     @db.VarChar(200)
+  telefone                  String?                     @db.VarChar(20)
+  ativo                     Boolean                     @default(true)
+  termo_aceito              Boolean                     @default(false)
+  tb_documento_fiscal       tb_documento_fiscal[]
+  tb_sistema_conta          tb_sistema_conta            @relation(fields: [id_conta], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_loja_conta")
+  tb_sistema_usuario        tb_sistema_usuario          @relation(fields: [id_usuario], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_loja_usuario")
+  tb_loja_cashback          tb_loja_cashback[]
+  tb_loja_cashback_detalhes tb_loja_cashback_detalhes[]
+  tb_loja_contato           tb_loja_contato[]
+  tb_loja_endereco          tb_loja_endereco[]
+  tb_pedido                 tb_pedido[]
+  tb_pedido_item            tb_pedido_item[]
+
+  @@index([cnpj], map: "idx_loja_cnpj")
+}
+
+model tb_loja_cashback {
+  id                        BigInt                      @id @default(autoincrement())
+  id_pedido                 BigInt?
+  vl_previsto               Decimal                     @db.Decimal(14, 2)
+  vl_realizado              Decimal                     @db.Decimal(14, 2)
+  id_usuario                BigInt?
+  id_conta                  BigInt?
+  dt_inc                    DateTime                    @default(now()) @db.Timestamptz(6)
+  id_loja                   BigInt
+  id_fornecedor             BigInt
+  pago                      Boolean                     @default(false)
+  vl_pago                   Decimal                     @default(0.00) @db.Decimal(14, 2)
+  tipo_processamento        String?                     @db.VarChar(200)
+  competencia               DateTime?                   @db.Date
+  tb_sistema_conta          tb_sistema_conta?           @relation(fields: [id_conta], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_cashback_conta")
+  tb_fornecedor             tb_fornecedor               @relation(fields: [id_fornecedor], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_cashback_fornecedor")
+  tb_loja                   tb_loja                     @relation(fields: [id_loja], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_cashback_loja")
+  tb_loja_cashback_detalhes tb_loja_cashback_detalhes[]
+}
+
+model tb_loja_cashback_detalhes {
+  id               BigInt           @id @default(autoincrement())
+  vl_previsto      Decimal          @db.Decimal(14, 2)
+  vl_realizado     Decimal          @db.Decimal(14, 2)
+  id_usuario       BigInt?
+  id_conta         BigInt?
+  dt_inc           DateTime         @default(now()) @db.Timestamptz(6)
+  id_loja          BigInt
+  id_fornecedor    BigInt
+  id_cashback      BigInt
+  id_pedido_item   BigInt?
+  tb_loja_cashback tb_loja_cashback @relation(fields: [id_cashback], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_cashback_det_cashback")
+  tb_fornecedor    tb_fornecedor    @relation(fields: [id_fornecedor], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_cashback_det_forn")
+  tb_pedido_item   tb_pedido_item?  @relation(fields: [id_pedido_item], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_cashback_det_item")
+  tb_loja          tb_loja          @relation(fields: [id_loja], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_cashback_det_loja")
+}
+
+model tb_loja_contato {
+  id                 BigInt   @id @default(autoincrement())
+  id_loja            BigInt
+  nome               String   @db.VarChar(200)
+  email              String?  @db.VarChar(200)
+  fone1              String?  @db.VarChar(20)
+  fone2              String?  @db.VarChar(20)
+  is_responsavel     Boolean?
+  id_usuario         BigInt
+  id_conta           BigInt
+  dt_inc             DateTime @default(now()) @db.Timestamptz(6)
+  outras_informacoes String?  @db.VarChar(1000)
+  tb_loja            tb_loja  @relation(fields: [id_loja], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_loja_contato_loja")
+
+  @@index([id_loja], map: "idx_loja_contato_loja")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model tb_loja_endereco {
+  id                    BigInt   @id @default(autoincrement())
+  id_loja               BigInt
+  logradouro            String   @db.VarChar(200)
+  numero                String?  @db.VarChar(10)
+  bairro                String?  @db.VarChar(100)
+  cidade                String?  @db.VarChar(100)
+  estado                String?  @db.Char(2)
+  cep                   String   @db.VarChar(10)
+  id_usuario            BigInt
+  id_conta              BigInt
+  dt_inc                DateTime @default(now()) @db.Timestamptz(6)
+  is_endereco_principal Boolean? @default(false)
+  is_endereco_entrega   Boolean? @default(false)
+  pais                  String?  @db.VarChar(100)
+  tb_loja               tb_loja  @relation(fields: [id_loja], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_loja_endereco_loja")
+}
+
+model tb_pedido {
+  id                  BigInt             @id @default(autoincrement())
+  id_usuario          BigInt
+  id_conta            BigInt
+  id_fornecedor       BigInt
+  id_loja             BigInt
+  dt_inc              DateTime           @default(now()) @db.Timestamptz(6)
+  updated_at          DateTime?          @db.Timestamptz(6)
+  status              String?            @db.VarChar(100)
+  status_norm         String?            @db.VarChar(20)
+  codigo_rastreamento String?            @db.VarChar(50)
+  vl_total_pedido     Decimal?           @db.Decimal(14, 2)
+  is_televenda        Boolean            @default(false)
+  numero_nota_fiscal  String?            @db.VarChar(20)
+  chave_nota_fiscal   String?            @db.VarChar(100)
+  canal               String?            @db.VarChar(30)
+  tb_sistema_conta    tb_sistema_conta   @relation(fields: [id_conta], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_pedido_conta")
+  tb_fornecedor       tb_fornecedor      @relation(fields: [id_fornecedor], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_pedido_fornecedor")
+  tb_loja             tb_loja            @relation(fields: [id_loja], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_pedido_loja")
+  tb_sistema_usuario  tb_sistema_usuario @relation(fields: [id_usuario], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_pedido_usuario")
+  tb_pedido_item      tb_pedido_item[]
+
+  @@index([id_fornecedor, status], map: "idx_pedido_fornecedor")
+  @@index([id_loja, dt_inc], map: "idx_pedido_loja_dt")
+  @@index([status_norm], map: "idx_pedido_status_norm")
+}
+
+model tb_pedido_item {
+  id                           BigInt                      @id @default(autoincrement())
+  id_pedido                    BigInt
+  id_conta                     BigInt
+  id_fornecedor                BigInt
+  id_loja                      BigInt?
+  id_usuario                   BigInt
+  id_produto                   BigInt?
+  id_campanha                  BigInt?
+  quantidade                   Decimal?                    @db.Decimal(14, 3)
+  valor_unitario               Decimal?                    @db.Decimal(14, 2)
+  valor_total                  Decimal?                    @db.Decimal(14, 2)
+  percentual_cashback_aplicado Decimal?                    @db.Decimal(5, 2)
+  valor_cashback_previsto      Decimal?                    @db.Decimal(14, 2)
+  dt_inc                       DateTime                    @default(now()) @db.Timestamptz(6)
+  codigo_produto               String?                     @db.VarChar(20)
+  codigo_referencia            String?                     @db.VarChar(20)
+  produto                      String?                     @db.VarChar(200)
+  tb_loja_cashback_detalhes    tb_loja_cashback_detalhes[]
+  tb_fornecedor_campanha       tb_fornecedor_campanha?     @relation(fields: [id_campanha], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_item_campanha")
+  tb_fornecedor                tb_fornecedor               @relation(fields: [id_fornecedor], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_item_fornecedor")
+  tb_loja                      tb_loja?                    @relation(fields: [id_loja], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_item_loja")
+  tb_pedido                    tb_pedido                   @relation(fields: [id_pedido], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_item_pedido")
+  tb_fornecedor_produto        tb_fornecedor_produto?      @relation(fields: [id_produto], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_item_produto")
+  tb_sistema_usuario           tb_sistema_usuario          @relation(fields: [id_usuario], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_item_usuario")
+
+  @@index([id_fornecedor, dt_inc], map: "idx_item_fornecedor_dt")
+  @@index([id_pedido], map: "idx_item_pedido")
+  @@index([id_pedido, id_produto], map: "idx_item_pedido_produto")
+}
+
+model tb_sistema_conta {
+  id                     BigInt                   @id @default(autoincrement())
+  dh_inc                 DateTime                 @default(now()) @db.Timestamptz(6)
+  nm_conta               String                   @db.VarChar(200)
+  ativo                  Boolean                  @default(false)
+  dh_desativacao         DateTime?                @db.Timestamptz(6)
+  tb_arquivo             tb_arquivo[]
+  tb_categoria           tb_categoria[]
+  tb_documento_fiscal    tb_documento_fiscal[]
+  tb_fornecedor          tb_fornecedor[]
+  tb_fornecedor_campanha tb_fornecedor_campanha[]
+  tb_fornecedor_condicao tb_fornecedor_condicao[]
+  tb_loja                tb_loja[]
+  tb_loja_cashback       tb_loja_cashback[]
+  tb_pedido              tb_pedido[]
+  tb_sistema_usuario     tb_sistema_usuario[]
+}
+
+model tb_sistema_usuario {
+  id                        BigInt                      @id @default(autoincrement())
+  id_conta                  BigInt
+  nome                      String?                     @db.VarChar(200)
+  email                     String                      @db.VarChar(200)
+  senha                     String                      @db.VarChar(200)
+  ativo                     Boolean?                    @default(false)
+  tb_fornecedor             tb_fornecedor[]
+  tb_fornecedor_campanha    tb_fornecedor_campanha[]
+  tb_fornecedor_condicao    tb_fornecedor_condicao[]
+  tb_loja                   tb_loja[]
+  tb_pedido                 tb_pedido[]
+  tb_pedido_item            tb_pedido_item[]
+  tb_sistema_conta          tb_sistema_conta            @relation(fields: [id_conta], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_usuario_conta")
+  tb_sistema_usuario_perfil tb_sistema_usuario_perfil[]
+
+  @@unique([id_conta, email], map: "uq_usuario_email_por_conta")
+}
+
+model tb_sistema_usuario_perfil {
+  id                 BigInt             @id @default(autoincrement())
+  id_usuario         BigInt
+  perfil             String             @db.VarChar(100)
+  tb_sistema_usuario tb_sistema_usuario @relation(fields: [id_usuario], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_usuario_perfil_usuario")
+
+  @@unique([id_usuario, perfil], map: "uq_usuario_perfil")
+}
