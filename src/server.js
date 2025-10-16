@@ -6,6 +6,7 @@ import { PrismaClient } from "@prisma/client";
 import { jsonBigIntMiddleware } from "./middlewares/jsonBigIntMiddleware.js";
 
 import fornecedoresRoutes from "./routes/fornecedores.js";
+import lojaRoutes from "./routes/lojas.js";
 
 dotenv.config();
 const app = express();
@@ -44,3 +45,4 @@ app.listen(PORT, () => {
 });
 
 app.use("/fornecedores", fornecedoresRoutes);
+app.use("/lojas", lojaRoutes);
