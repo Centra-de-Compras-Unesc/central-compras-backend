@@ -218,7 +218,7 @@ model tb_fornecedor_produto {
 model tb_loja {
   id                        BigInt                      @id @default(autoincrement())
   cnpj                      String                      @unique(map: "uq_loja_cnpj") @db.VarChar(20)
-  nome_fantasia             String                      @db.VarChar(500)
+  nome_fantasia             String?                     @db.VarChar(500)
   razao_social              String?                     @db.VarChar(500)
   inscricao_estadual        String?                     @db.VarChar(50)
   id_usuario                BigInt
