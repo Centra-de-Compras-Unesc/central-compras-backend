@@ -11,6 +11,8 @@ import lojaRoutes from "./routes/lojas.js";
 import produtoRoutes from "./routes/produtos.js"
 import campanhaRoutes from "./routes/campanhas.js";
 import campanhaProdutoRoutes from "./routes/campanhaProduto.js";
+import pedidoRoutes from "./routes/pedidos.js";
+import pedidoItensRoutes from "./routes/pedidoItens.js";
 
 dotenv.config();
 const app = express();
@@ -54,3 +56,5 @@ app.use("/lojas", lojaRoutes);
 app.use("/produtos", produtoRoutes);
 app.use("/campanhas", campanhaRoutes);
 app.use("/campanha-produto", campanhaProdutoRoutes);
+app.use("/pedidos", pedidoRoutes);
+app.use("/pedido-itens", pedidoItensRoutes);
