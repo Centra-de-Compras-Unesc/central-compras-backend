@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { PrismaClient } from "@prisma/client";
 
 import { jsonBigIntMiddleware } from "./middlewares/jsonBigIntMiddleware.js";
+import { verifyToken } from "./middlewares/authMiddleware.js";
 
 // Importa as rotas
 import fornecedoresRoutes from "./routes/fornecedores.js";
@@ -12,8 +13,10 @@ import produtoRoutes from "./routes/produtos.js"
 import campanhaRoutes from "./routes/campanhas.js";
 import campanhaProdutoRoutes from "./routes/campanhaProduto.js";
 import pedidoRoutes from "./routes/pedidos.js";
+import pedidosRoutes from "./routes/pedidos.js";
 import pedidoItensRoutes from "./routes/pedidoItens.js";
 import usuariosRoutes from "./routes/usuarios.js";
+import authRoutes from "./routes/auth.js";
 
 dotenv.config();
 const app = express();
@@ -58,5 +61,7 @@ app.use("/produtos", produtoRoutes);
 app.use("/campanhas", campanhaRoutes);
 app.use("/campanha-produto", campanhaProdutoRoutes);
 app.use("/pedidos", pedidoRoutes);
+app.use("/pedidos", verifyToken, pedidosRoutes);
 app.use("/pedido-itens", pedidoItensRoutes);
 app.use("/usuarios", usuariosRoutes);
+app.use("/auth", authRoutes);
