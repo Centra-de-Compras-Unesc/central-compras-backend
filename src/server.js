@@ -9,6 +9,7 @@ import { jsonBigIntMiddleware } from "./middlewares/jsonBigIntMiddleware.js";
 import fornecedoresRoutes from "./routes/fornecedores.js";
 import lojaRoutes from "./routes/lojas.js";
 import produtoRoutes from "./routes/produtos.js"
+import campanhaRoutes from "./routes/campanhas.js";
 
 dotenv.config();
 const app = express();
@@ -50,3 +51,4 @@ app.listen(PORT, () => {
 app.use("/fornecedores", fornecedoresRoutes);
 app.use("/lojas", lojaRoutes);
 app.use("/produtos", produtoRoutes);
+app.use("/campanhas", campanhaRoutes);
