@@ -5,8 +5,10 @@ import { PrismaClient } from "@prisma/client";
 
 import { jsonBigIntMiddleware } from "./middlewares/jsonBigIntMiddleware.js";
 
+// Importa as rotas
 import fornecedoresRoutes from "./routes/fornecedores.js";
 import lojaRoutes from "./routes/lojas.js";
+import produtoRoutes from "./routes/produtos.js"
 
 dotenv.config();
 const app = express();
@@ -44,5 +46,7 @@ app.listen(PORT, () => {
   console.log(`✅ Servidor rodando em http://localhost:${PORT}`);
 });
 
+// Usa as rotas importadas
 app.use("/fornecedores", fornecedoresRoutes);
 app.use("/lojas", lojaRoutes);
+app.use("/produtos", produtoRoutes);
