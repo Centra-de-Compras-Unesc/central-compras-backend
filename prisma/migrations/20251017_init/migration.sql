@@ -1,0 +1,29 @@
+-- MIGRATION: 20251017_init
+-- Esta migração inicial serve apenas para alinhar o estado atual do banco com o Prisma.
+-- Nenhuma alteração será aplicada, pois o banco já contém todas as tabelas.
+
+-- Confirmação de estrutura já existente no banco:
+-- Tabelas:
+--   tb_arquivo
+--   tb_categoria
+--   tb_documento_fiscal
+--   tb_fornecedor
+--   tb_fornecedor_campanha
+--   tb_fornecedor_campanha_produto
+--   tb_fornecedor_condicao
+--   tb_fornecedor_contato
+--   tb_fornecedor_endereco
+--   tb_fornecedor_produto
+--   tb_loja
+--   tb_loja_cashback
+--   tb_loja_cashback_detalhes
+--   tb_loja_contato
+--   tb_loja_endereco
+--   tb_pedido
+--   tb_pedido_item
+--   tb_sistema_conta
+--   tb_sistema_usuario
+--   tb_sistema_usuario_perfil
+
+-- Nenhuma modificação necessária.
+-- O Prisma apenas usará este registro para saber que o banco já está sincronizado.

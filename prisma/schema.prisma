@@ -201,7 +201,7 @@ model tb_fornecedor_produto {
   produto                        String                           @db.VarChar(200)
   gtin                           String?                          @db.VarChar(20)
   codigo_referencia              String?                          @db.VarChar(20)
-  tipo_embalagem                 String?                          @db.VarChar(20)
+  tipo_embalagem                 String?                          @db.VarChar(50)
   valor_produto                  Decimal                          @db.Decimal(14, 2)
   foto                           Bytes?
   dt_inc                         DateTime                         @default(now()) @db.Timestamptz(6)
