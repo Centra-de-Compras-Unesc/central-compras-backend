@@ -5,9 +5,6 @@ import jwt from "jsonwebtoken";
 const prisma = new PrismaClient();
 const SECRET = process.env.JWT_SECRET || "segredo_super_seguro";
 
-// =====================
-// POST /auth/login
-// =====================
 export const login = async (req, res) => {
   const { email, senha, id_conta } = req.body;
 
@@ -54,9 +51,6 @@ export const login = async (req, res) => {
   }
 };
 
-// =====================
-// POST /auth/register
-// =====================
 export const register = async (req, res) => {
   const { id_conta, nome, email, senha } = req.body;
 

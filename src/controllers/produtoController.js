@@ -1,9 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
-/**
- * Função utilitária para converter BigInt e Decimal em tipos seguros de JSON
- */
 function serializeBigInt(obj) {
   return JSON.parse(
     JSON.stringify(obj, (key, value) => {
@@ -19,9 +16,6 @@ function serializeBigInt(obj) {
   );
 }
 
-// ===========================
-// GET: Lista todos os produtos
-// ===========================
 export const getProdutos = async (req, res) => {
   try {
     const produtos = await prisma.tb_fornecedor_produto.findMany({
@@ -43,9 +37,6 @@ export const getProdutos = async (req, res) => {
   }
 };
 
-// ===========================
-// GET: Um produto específico
-// ===========================
 export const getProdutoById = async (req, res) => {
   try {
     const produto = await prisma.tb_fornecedor_produto.findUnique({
@@ -69,9 +60,6 @@ export const getProdutoById = async (req, res) => {
   }
 };
 
-// ===========================
-// POST: Cria novo produto
-// ===========================
 export const createProduto = async (req, res) => {
   try {
     const {
@@ -88,7 +76,13 @@ export const createProduto = async (req, res) => {
       foto,
     } = req.body;
 
-    if (!id_fornecedor || !id_usuario || !id_conta || !produto || !valor_produto)
+    if (
+      !id_fornecedor ||
+      !id_usuario ||
+      !id_conta ||
+      !produto ||
+      !valor_produto
+    )
       return res.status(400).json({ message: "Campos obrigatórios ausentes." });
 
     const novoProduto = await prisma.tb_fornecedor_produto.create({
@@ -117,9 +111,6 @@ export const createProduto = async (req, res) => {
   }
 };
 
-// ===========================
-// PUT: Atualiza um produto
-// ===========================
 export const updateProduto = async (req, res) => {
   try {
     const id = Number(req.params.id);
@@ -146,9 +137,6 @@ export const updateProduto = async (req, res) => {
   }
 };
 
-// ===========================
-// DELETE: Remove um produto
-// ===========================
 export const deleteProduto = async (req, res) => {
   try {
     const id = Number(req.params.id);

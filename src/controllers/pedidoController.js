@@ -19,9 +19,7 @@ function serializeBigInt(obj) {
   );
 }
 
-// ===========================
-// GET: Lista todos os pedidos
-// ===========================
+
 export const getPedidos = async (req, res) => {
   try {
     const pedidos = await prisma.tb_pedido.findMany({
@@ -44,9 +42,7 @@ export const getPedidos = async (req, res) => {
   }
 };
 
-// ===========================
-// GET: Pedido específico
-// ===========================
+
 export const getPedidoById = async (req, res) => {
   try {
     const id = Number(req.params.id);
@@ -73,9 +69,7 @@ export const getPedidoById = async (req, res) => {
   }
 };
 
-// ===========================
-// POST: Cria novo pedido
-// ===========================
+
 export const createPedido = async (req, res) => {
   try {
     const {
@@ -126,9 +120,7 @@ export const createPedido = async (req, res) => {
   }
 };
 
-// ===========================
-// PUT: Atualiza pedido
-// ===========================
+
 export const updatePedido = async (req, res) => {
   try {
     const id = Number(req.params.id);
@@ -155,9 +147,7 @@ export const updatePedido = async (req, res) => {
   }
 };
 
-// ===========================
-// DELETE: Remove pedido
-// ===========================
+
 export const deletePedido = async (req, res) => {
   try {
     const id = Number(req.params.id);

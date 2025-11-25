@@ -9,7 +9,7 @@ import { verifyToken } from "./middlewares/authMiddleware.js";
 // Importa as rotas
 import fornecedoresRoutes from "./routes/fornecedores.js";
 import lojaRoutes from "./routes/lojas.js";
-import produtoRoutes from "./routes/produtos.js"
+import produtoRoutes from "./routes/produtos.js";
 import campanhaRoutes from "./routes/campanhas.js";
 import campanhaProdutoRoutes from "./routes/campanhaProduto.js";
 import pedidoRoutes from "./routes/pedidos.js";
@@ -17,6 +17,8 @@ import pedidosRoutes from "./routes/pedidos.js";
 import pedidoItensRoutes from "./routes/pedidoItens.js";
 import usuariosRoutes from "./routes/usuarios.js";
 import authRoutes from "./routes/auth.js";
+import condicoesComerciaisRoutes from "./routes/condicoesComercias.js";
+import cashbackRoutes from "./routes/cashback.js";
 
 dotenv.config();
 const app = express();
@@ -31,9 +33,13 @@ app.use(jsonBigIntMiddleware);
 app.get("/", async (req, res) => {
   try {
     const now = await prisma.$queryRaw`SELECT NOW() as current_time`;
-    res.send(`🚀 Conectado ao banco db_interdisciplinar! Hora atual: ${now[0].current_time}`);
+    res.send(
+      `🚀 Conectado ao banco db_interdisciplinar! Hora atual: ${now[0].current_time}`
+    );
   } catch (error) {
-    res.status(500).json({ error: "Erro ao conectar ao banco", details: error.message });
+    res
+      .status(500)
+      .json({ error: "Erro ao conectar ao banco", details: error.message });
   }
 });
 
@@ -65,3 +71,5 @@ app.use("/pedidos", verifyToken, pedidosRoutes);
 app.use("/pedido-itens", pedidoItensRoutes);
 app.use("/usuarios", usuariosRoutes);
 app.use("/auth", authRoutes);
+app.use("/condicoes-comerciais", condicoesComerciaisRoutes);
+app.use("/cashback", cashbackRoutes);

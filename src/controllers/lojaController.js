@@ -1,9 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
-/**
- * 🧮 Utilitário para converter BigInt em string antes de enviar como JSON
- */
 function serializeBigInt(obj) {
   return JSON.parse(
     JSON.stringify(obj, (key, value) =>
@@ -12,9 +9,6 @@ function serializeBigInt(obj) {
   );
 }
 
-// ===========================
-// 🔹 GET: Lista todas as lojas
-// ===========================
 export const getLojas = async (req, res) => {
   try {
     const lojas = await prisma.tb_loja.findMany({
@@ -32,17 +26,13 @@ export const getLojas = async (req, res) => {
   }
 };
 
-// ===========================
-// 🔹 GET: Retorna uma loja específica
-// ===========================
 export const getLojaById = async (req, res) => {
   try {
     const loja = await prisma.tb_loja.findUnique({
       where: { id: Number(req.params.id) },
     });
 
-    if (!loja)
-      return res.status(404).json({ message: "Loja não encontrada" });
+    if (!loja) return res.status(404).json({ message: "Loja não encontrada" });
 
     res.json(serializeBigInt(loja));
   } catch (error) {
@@ -53,9 +43,6 @@ export const getLojaById = async (req, res) => {
   }
 };
 
-// ===========================
-// 🔹 POST: Cria nova loja
-// ===========================
 export const createLoja = async (req, res) => {
   try {
     const {
@@ -101,10 +88,6 @@ export const createLoja = async (req, res) => {
   }
 };
 
-
-// ===========================
-// 🔹 PUT: Atualiza uma loja existente
-// ===========================
 export const updateLoja = async (req, res) => {
   try {
     const id = Number(req.params.id);
@@ -131,9 +114,6 @@ export const updateLoja = async (req, res) => {
   }
 };
 
-// ===========================
-// 🔹 DELETE: Remove uma loja
-// ===========================
 export const deleteLoja = async (req, res) => {
   try {
     const id = Number(req.params.id);

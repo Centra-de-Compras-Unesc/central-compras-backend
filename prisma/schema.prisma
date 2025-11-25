@@ -201,7 +201,7 @@ model tb_fornecedor_produto {
   produto                        String                           @db.VarChar(200)
   gtin                           String?                          @db.VarChar(20)
   codigo_referencia              String?                          @db.VarChar(20)
-  tipo_embalagem                 String?                          @db.VarChar(50)
+  tipo_embalagem                 String?                          @db.VarChar(20)
   valor_produto                  Decimal                          @db.Decimal(14, 2)
   foto                           Bytes?
   dt_inc                         DateTime                         @default(now()) @db.Timestamptz(6)
@@ -399,6 +399,16 @@ model tb_sistema_usuario {
   email                     String                      @db.VarChar(200)
   senha                     String                      @db.VarChar(200)
   ativo                     Boolean?                    @default(false)
+  loja                      String?                     @db.VarChar(200)
+  telefone                  String?                     @db.VarChar(20)
+  cnpj                      String?                     @db.VarChar(20)
+  cep                       String?                     @db.VarChar(10)
+  endereco                  String?                     @db.VarChar(200)
+  numero                    String?                     @db.VarChar(10)
+  bairro                    String?                     @db.VarChar(100)
+  cidade                    String?                     @db.VarChar(100)
+  estado                    String?                     @db.Char(2)
+  avatarUrl                 String?                     @db.VarChar(3000)
   tb_fornecedor             tb_fornecedor[]
   tb_fornecedor_campanha    tb_fornecedor_campanha[]
   tb_fornecedor_condicao    tb_fornecedor_condicao[]

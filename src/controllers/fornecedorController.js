@@ -12,9 +12,7 @@ function serializeBigInt(obj) {
   );
 }
 
-// ===========================
-// GET: Lista todos os fornecedores
-// ===========================
+
 export const getFornecedores = async (req, res) => {
   try {
     const fornecedores = await prisma.tb_fornecedor.findMany({
@@ -39,9 +37,7 @@ export const getFornecedores = async (req, res) => {
   }
 };
 
-// ===========================
-// GET: Um fornecedor específico
-// ===========================
+
 export const getFornecedorById = async (req, res) => {
   try {
     const fornecedor = await prisma.tb_fornecedor.findUnique({
@@ -60,9 +56,7 @@ export const getFornecedorById = async (req, res) => {
   }
 };
 
-// ===========================
-// POST: Cria novo fornecedor
-// ===========================
+
 export const createFornecedor = async (req, res) => {
   try {
     const {
@@ -105,9 +99,7 @@ export const createFornecedor = async (req, res) => {
   }
 };
 
-// ===========================
-// PUT: Atualiza um fornecedor
-// ===========================
+
 export const updateFornecedor = async (req, res) => {
   try {
     const id = Number(req.params.id);
@@ -133,9 +125,7 @@ export const updateFornecedor = async (req, res) => {
   }
 };
 
-// ===========================
-// DELETE: Remove um fornecedor
-// ===========================
+
 export const deleteFornecedor = async (req, res) => {
   try {
     const id = Number(req.params.id);

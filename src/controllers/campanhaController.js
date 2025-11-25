@@ -19,9 +19,7 @@ function serializeBigInt(obj) {
   );
 }
 
-// ===========================
-// GET: Lista todas as campanhas
-// ===========================
+
 export const getCampanhas = async (req, res) => {
   try {
     const campanhas = await prisma.tb_fornecedor_campanha.findMany({
@@ -43,9 +41,7 @@ export const getCampanhas = async (req, res) => {
   }
 };
 
-// ===========================
-// GET: Uma campanha específica
-// ===========================
+
 export const getCampanhaById = async (req, res) => {
   try {
     const campanha = await prisma.tb_fornecedor_campanha.findUnique({
@@ -69,9 +65,7 @@ export const getCampanhaById = async (req, res) => {
   }
 };
 
-// ===========================
-// POST: Cria nova campanha
-// ===========================
+
 export const createCampanha = async (req, res) => {
   try {
     const {
@@ -134,9 +128,7 @@ export const createCampanha = async (req, res) => {
   }
 };
 
-// ===========================
-// PUT: Atualiza uma campanha
-// ===========================
+
 export const updateCampanha = async (req, res) => {
   try {
     const id = Number(req.params.id);
@@ -163,9 +155,7 @@ export const updateCampanha = async (req, res) => {
   }
 };
 
-// ===========================
-// DELETE: Remove uma campanha
-// ===========================
+
 export const deleteCampanha = async (req, res) => {
   try {
     const id = Number(req.params.id);

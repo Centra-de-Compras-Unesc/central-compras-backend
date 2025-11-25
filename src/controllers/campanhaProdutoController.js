@@ -19,9 +19,7 @@ function serializeBigInt(obj) {
   );
 }
 
-// ===========================
-// GET: Lista todas as campanhas-produto
-// ===========================
+
 export const getCampanhaProdutos = async (req, res) => {
   try {
     const campanhaProdutos = await prisma.tb_fornecedor_campanha_produto.findMany({
@@ -47,9 +45,7 @@ export const getCampanhaProdutos = async (req, res) => {
   }
 };
 
-// ===========================
-// GET: Uma relação específica
-// ===========================
+
 export const getCampanhaProdutoById = async (req, res) => {
   try {
     const id = Number(req.params.id);
@@ -74,9 +70,7 @@ export const getCampanhaProdutoById = async (req, res) => {
   }
 };
 
-// ===========================
-// POST: Cria nova relação
-// ===========================
+
 export const createCampanhaProduto = async (req, res) => {
   try {
     const { id_conta, id_usuario, id_campanha, id_produto, preco_promocional } = req.body;
@@ -107,9 +101,7 @@ export const createCampanhaProduto = async (req, res) => {
   }
 };
 
-// ===========================
-// PUT: Atualiza uma relação
-// ===========================
+
 export const updateCampanhaProduto = async (req, res) => {
   try {
     const id = Number(req.params.id);
@@ -135,9 +127,7 @@ export const updateCampanhaProduto = async (req, res) => {
   }
 };
 
-// ===========================
-// DELETE: Remove uma relação
-// ===========================
+
 export const deleteCampanhaProduto = async (req, res) => {
   try {
     const id = Number(req.params.id);

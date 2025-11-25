@@ -1,9 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
-/**
- * Função utilitária para converter BigInt e Decimal em tipos JSON seguros
- */
 function serializeBigInt(obj) {
   return JSON.parse(
     JSON.stringify(obj, (key, value) => {
@@ -19,9 +16,6 @@ function serializeBigInt(obj) {
   );
 }
 
-// ===========================
-// GET: Lista todos os usuários
-// ===========================
 export const getUsuarios = async (req, res) => {
   try {
     const usuarios = await prisma.tb_sistema_usuario.findMany({
@@ -42,9 +36,6 @@ export const getUsuarios = async (req, res) => {
   }
 };
 
-// ===========================
-// GET: Usuário específico
-// ===========================
 export const getUsuarioById = async (req, res) => {
   try {
     const id = Number(req.params.id);
@@ -68,17 +59,12 @@ export const getUsuarioById = async (req, res) => {
   }
 };
 
-// ===========================
-// POST: Cria novo usuário
-// ===========================
 export const createUsuario = async (req, res) => {
   try {
     const { id_conta, nome, email, senha, ativo } = req.body;
 
     if (!id_conta || !nome || !email || !senha)
-      return res
-        .status(400)
-        .json({ message: "Campos obrigatórios ausentes." });
+      return res.status(400).json({ message: "Campos obrigatórios ausentes." });
 
     const novoUsuario = await prisma.tb_sistema_usuario.create({
       data: {
@@ -108,9 +94,6 @@ export const createUsuario = async (req, res) => {
   }
 };
 
-// ===========================
-// PUT: Atualiza usuário
-// ===========================
 export const updateUsuario = async (req, res) => {
   try {
     const id = Number(req.params.id);
@@ -137,9 +120,6 @@ export const updateUsuario = async (req, res) => {
   }
 };
 
-// ===========================
-// DELETE: Remove usuário
-// ===========================
 export const deleteUsuario = async (req, res) => {
   try {
     const id = Number(req.params.id);
