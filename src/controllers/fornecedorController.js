@@ -12,7 +12,6 @@ function serializeBigInt(obj) {
   );
 }
 
-
 export const getFornecedores = async (req, res) => {
   try {
     const fornecedores = await prisma.tb_fornecedor.findMany({
@@ -20,7 +19,6 @@ export const getFornecedores = async (req, res) => {
       take: 50,
     });
 
-    // Conversão segura para evitar erro com BigInt
     const safeData = JSON.parse(
       JSON.stringify(fornecedores, (key, value) =>
         typeof value === "bigint" ? value.toString() : value
@@ -29,14 +27,12 @@ export const getFornecedores = async (req, res) => {
 
     res.json(safeData);
   } catch (error) {
-    console.error("Erro no GET /fornecedores:", error);
     res.status(500).json({
       error: "Erro ao listar fornecedores",
       details: error.message,
     });
   }
 };
-
 
 export const getFornecedorById = async (req, res) => {
   try {
@@ -56,7 +52,6 @@ export const getFornecedorById = async (req, res) => {
   }
 };
 
-
 export const createFornecedor = async (req, res) => {
   try {
     const {
@@ -72,9 +67,7 @@ export const createFornecedor = async (req, res) => {
     } = req.body;
 
     if (!id_conta || !id_usuario || !cnpj || !email_fornecedor)
-      return res
-        .status(400)
-        .json({ message: "Campos obrigatórios ausentes." });
+      return res.status(400).json({ message: "Campos obrigatórios ausentes." });
 
     const novoFornecedor = await prisma.tb_fornecedor.create({
       data: {
@@ -98,7 +91,6 @@ export const createFornecedor = async (req, res) => {
     });
   }
 };
-
 
 export const updateFornecedor = async (req, res) => {
   try {
@@ -124,7 +116,6 @@ export const updateFornecedor = async (req, res) => {
     });
   }
 };
-
 
 export const deleteFornecedor = async (req, res) => {
   try {

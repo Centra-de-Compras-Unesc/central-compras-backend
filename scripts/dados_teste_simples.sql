@@ -44,6 +44,17 @@ VALUES
   (1, 'Admin User', 'admin@test.com', '123456', true, 'Administrativo', '(11) 3333-3333', '33.333.333/0001-00', '03310300', 'Rua Principal', '100', 'Centro', 'São Paulo', 'SP', '');
 
 -- ========================================
+-- 2.1 CRIAR PERFIS DOS USUÁRIOS
+-- ========================================
+ALTER SEQUENCE tb_sistema_usuario_perfil_id_seq RESTART WITH 1;
+
+INSERT INTO tb_sistema_usuario_perfil (id_usuario, perfil)
+VALUES 
+  (1, 'loja'),       -- João Silva é Loja
+  (2, 'fornecedor'), -- Maria Santos é Fornecedor
+  (3, 'admin');      -- Admin User é Admin
+
+-- ========================================
 -- 3. CRIAR CATEGORIAS
 -- ========================================
 ALTER SEQUENCE tb_categoria_id_seq RESTART WITH 1;
@@ -74,6 +85,34 @@ INSERT INTO tb_loja (id_conta, id_usuario, cnpj, nome_fantasia, razao_social, em
 VALUES 
   (1, 1, '11.111.111/0001-88', 'Loja Centro', 'LOJA CENTRO LTDA', 'loja@email.com.br', '(11) 4000-1111', true, true, NOW()),
   (1, 1, '22.222.222/0001-99', 'Loja Norte', 'LOJA NORTE LTDA', 'loja2@email.com.br', '(11) 4000-2222', true, true, NOW());
+
+-- ========================================
+-- 5.1 CRIAR ENDEREÇO DAS LOJAS
+-- ========================================
+ALTER SEQUENCE tb_loja_endereco_id_seq RESTART WITH 1;
+
+INSERT INTO tb_loja_endereco (id_loja, logradouro, numero, bairro, cidade, estado, cep, id_usuario, id_conta, is_endereco_principal, dt_inc)
+VALUES 
+  (1, 'Av. Paulista', '1000', 'Bela Vista', 'São Paulo', 'SP', '01310100', 1, 1, true, NOW()),
+  (2, 'Av. Tucuruvi', '2500', 'Tucuruvi', 'São Paulo', 'SP', '02304000', 1, 1, true, NOW());
+
+-- ========================================
+-- 5.2 CRIAR CONDIÇÕES COMERCIAIS DOS FORNECEDORES
+-- ========================================
+ALTER SEQUENCE tb_fornecedor_condicao_id_seq RESTART WITH 1;
+
+INSERT INTO tb_fornecedor_condicao (id_fornecedor, id_usuario, id_conta, estado, percentual_cashback, prazo_pagamento_dias, ajuste_unitario, observacoes, dt_inc)
+VALUES 
+  -- Fornecedor Brasil - Condições por estado
+  (1, 2, 1, 'SP', 5.00, 30, 0.00, 'Condição SP - 5% cashback, 30 dias', NOW()),
+  (1, 2, 1, 'RJ', 4.50, 45, 1.50, 'Condição RJ - 4.5% cashback, 45 dias, +R$1.50/un', NOW()),
+  (1, 2, 1, 'MG', 4.00, 30, 2.00, 'Condição MG - 4% cashback, 30 dias, +R$2.00/un', NOW()),
+  (1, 2, 1, 'BA', 3.50, 60, 3.00, 'Condição BA - 3.5% cashback, 60 dias, +R$3.00/un', NOW()),
+  -- Distrib. Nacional - Condições por estado
+  (2, 2, 1, 'SP', 3.50, 28, 0.00, 'Condição SP - 3.5% cashback, 28 dias', NOW()),
+  (2, 2, 1, 'RJ', 3.00, 35, 0.50, 'Condição RJ - 3% cashback, 35 dias, +R$0.50/un', NOW()),
+  (2, 2, 1, 'PR', 3.00, 45, 1.00, 'Condição PR - 3% cashback, 45 dias, +R$1.00/un', NOW()),
+  (2, 2, 1, 'SC', 2.50, 45, 1.50, 'Condição SC - 2.5% cashback, 45 dias, +R$1.50/un', NOW());
 
 -- ========================================
 -- 6. CRIAR PRODUTOS

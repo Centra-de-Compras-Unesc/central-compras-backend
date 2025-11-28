@@ -15,13 +15,10 @@ async function atualizarSenhas() {
           where: { id: user.id },
           data: { senha: novaSenhaHash },
         });
-        console.log(`✅ Senha atualizada para: ${user.email}`);
       }
     }
 
-    console.log("✅ Todas as senhas foram verificadas e atualizadas com sucesso!");
   } catch (error) {
-    console.error("❌ Erro ao atualizar senhas:", error);
   } finally {
     await prisma.$disconnect();
   }

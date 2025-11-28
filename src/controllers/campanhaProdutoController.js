@@ -37,7 +37,6 @@ export const getCampanhaProdutos = async (req, res) => {
 
     res.json(serializeBigInt(campanhaProdutos));
   } catch (error) {
-    console.error("Erro no GET /campanha-produto:", error);
     res.status(500).json({
       error: "Erro ao listar campanha-produto",
       details: error.message,
@@ -62,7 +61,6 @@ export const getCampanhaProdutoById = async (req, res) => {
 
     res.json(serializeBigInt(campanhaProduto));
   } catch (error) {
-    console.error("Erro no GET /campanha-produto/:id:", error);
     res.status(500).json({
       error: "Erro ao buscar relação campanha-produto",
       details: error.message,
@@ -93,7 +91,6 @@ export const createCampanhaProduto = async (req, res) => {
 
     res.status(201).json(serializeBigInt(novaRelacao));
   } catch (error) {
-    console.error("Erro no POST /campanha-produto:", error);
     res.status(500).json({
       error: "Erro ao criar relação campanha-produto",
       details: error.message,
@@ -119,7 +116,6 @@ export const updateCampanhaProduto = async (req, res) => {
 
     res.json(serializeBigInt(relacaoAtualizada));
   } catch (error) {
-    console.error("Erro no PUT /campanha-produto/:id:", error);
     res.status(500).json({
       error: "Erro ao atualizar relação campanha-produto",
       details: error.message,
@@ -142,7 +138,6 @@ export const deleteCampanhaProduto = async (req, res) => {
 
     res.json({ message: "Relação campanha-produto removida com sucesso" });
   } catch (error) {
-    console.error("Erro no DELETE /campanha-produto/:id:", error);
     res.status(500).json({
       error: "Erro ao deletar relação campanha-produto",
       details: error.message,

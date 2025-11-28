@@ -404,7 +404,17 @@ exports.Prisma.Tb_sistema_usuarioScalarFieldEnum = {
   nome: 'nome',
   email: 'email',
   senha: 'senha',
-  ativo: 'ativo'
+  ativo: 'ativo',
+  loja: 'loja',
+  telefone: 'telefone',
+  cnpj: 'cnpj',
+  cep: 'cep',
+  endereco: 'endereco',
+  numero: 'numero',
+  bairro: 'bairro',
+  cidade: 'cidade',
+  estado: 'estado',
+  avatarUrl: 'avatarUrl'
 };
 
 exports.Prisma.Tb_sistema_usuario_perfilScalarFieldEnum = {

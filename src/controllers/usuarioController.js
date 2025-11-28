@@ -28,7 +28,6 @@ export const getUsuarios = async (req, res) => {
 
     res.json(serializeBigInt(usuarios));
   } catch (error) {
-    console.error("Erro no GET /usuarios:", error);
     res.status(500).json({
       error: "Erro ao listar usuários",
       details: error.message,
@@ -51,7 +50,6 @@ export const getUsuarioById = async (req, res) => {
 
     res.json(serializeBigInt(usuario));
   } catch (error) {
-    console.error("Erro no GET /usuarios/:id:", error);
     res.status(500).json({
       error: "Erro ao buscar usuário",
       details: error.message,
@@ -78,8 +76,6 @@ export const createUsuario = async (req, res) => {
 
     res.status(201).json(serializeBigInt(novoUsuario));
   } catch (error) {
-    console.error("Erro no POST /usuarios:", error);
-
     // Tratamento específico de erro de chave única (email duplicado)
     if (error.code === "P2002") {
       return res
@@ -105,14 +101,58 @@ export const updateUsuario = async (req, res) => {
     if (!usuarioExistente)
       return res.status(404).json({ message: "Usuário não encontrado" });
 
+    // Filtrar apenas campos permitidos para atualização
+    const {
+      nome,
+      email,
+      senha,
+      ativo,
+      telefone,
+      cnpj,
+      cep,
+      endereco,
+      numero,
+      bairro,
+      cidade,
+      estado,
+      avatarUrl,
+      loja,
+    } = req.body;
+
+    const dataAtualizar = {};
+    if (nome !== undefined) dataAtualizar.nome = nome;
+    if (email !== undefined) dataAtualizar.email = email;
+    if (senha !== undefined) dataAtualizar.senha = senha;
+    if (ativo !== undefined) dataAtualizar.ativo = ativo;
+    if (telefone !== undefined) dataAtualizar.telefone = telefone;
+    if (cnpj !== undefined) dataAtualizar.cnpj = cnpj;
+    if (cep !== undefined) dataAtualizar.cep = cep;
+    if (endereco !== undefined) dataAtualizar.endereco = endereco;
+    if (numero !== undefined) dataAtualizar.numero = numero;
+    if (bairro !== undefined) dataAtualizar.bairro = bairro;
+    if (cidade !== undefined) dataAtualizar.cidade = cidade;
+    if (estado !== undefined) dataAtualizar.estado = estado;
+    if (avatarUrl !== undefined) dataAtualizar.avatarUrl = avatarUrl;
+    if (loja !== undefined) dataAtualizar.loja = loja;
+
     const usuarioAtualizado = await prisma.tb_sistema_usuario.update({
       where: { id },
-      data: req.body,
+      data: dataAtualizar,
+      include: {
+        tb_sistema_conta: { select: { id: true, nm_conta: true } },
+        tb_sistema_usuario_perfil: true,
+      },
     });
 
     res.json(serializeBigInt(usuarioAtualizado));
   } catch (error) {
-    console.error("Erro no PUT /usuarios/:id:", error);
+    // Tratamento específico de erro de chave única (email duplicado)
+    if (error.code === "P2002") {
+      return res
+        .status(409)
+        .json({ message: "E-mail já cadastrado para esta conta." });
+    }
+
     res.status(500).json({
       error: "Erro ao atualizar usuário",
       details: error.message,
@@ -135,7 +175,6 @@ export const deleteUsuario = async (req, res) => {
 
     res.json({ message: "Usuário removido com sucesso" });
   } catch (error) {
-    console.error("Erro no DELETE /usuarios/:id:", error);
     res.status(500).json({
       error: "Erro ao deletar usuário",
       details: error.message,

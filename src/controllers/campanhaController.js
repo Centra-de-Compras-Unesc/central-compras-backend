@@ -33,7 +33,6 @@ export const getCampanhas = async (req, res) => {
 
     res.json(serializeBigInt(campanhas));
   } catch (error) {
-    console.error("Erro no GET /campanhas:", error);
     res.status(500).json({
       error: "Erro ao listar campanhas",
       details: error.message,
@@ -57,7 +56,6 @@ export const getCampanhaById = async (req, res) => {
 
     res.json(serializeBigInt(campanha));
   } catch (error) {
-    console.error("Erro no GET /campanhas/:id:", error);
     res.status(500).json({
       error: "Erro ao buscar campanha",
       details: error.message,
@@ -120,7 +118,6 @@ export const createCampanha = async (req, res) => {
 
     res.status(201).json(serializeBigInt(novaCampanha));
   } catch (error) {
-    console.error("Erro no POST /campanhas:", error);
     res.status(500).json({
       error: "Erro ao criar campanha",
       details: error.message,
@@ -147,7 +144,6 @@ export const updateCampanha = async (req, res) => {
 
     res.json(serializeBigInt(campanhaAtualizada));
   } catch (error) {
-    console.error("Erro no PUT /campanhas/:id:", error);
     res.status(500).json({
       error: "Erro ao atualizar campanha",
       details: error.message,
@@ -171,7 +167,6 @@ export const deleteCampanha = async (req, res) => {
 
     res.json({ message: "Campanha removida com sucesso" });
   } catch (error) {
-    console.error("Erro no DELETE /campanhas/:id:", error);
     res.status(500).json({
       error: "Erro ao deletar campanha",
       details: error.message,

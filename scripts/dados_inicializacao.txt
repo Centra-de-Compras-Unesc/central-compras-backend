@@ -1,0 +1,211 @@
+-- ===================================================================
+-- SCRIPT DE INICIALIZAÇÃO - ADAPTADO AO BANCO EXISTENTE
+-- ===================================================================
+-- Descrição:
+--  1. Script limpo para popular dados de teste no banco PostgreSQL
+--  2. Adaptado ao schema gerado pelo Prisma (schema.prisma)
+--  3. Inclui contas, usuários, lojas, fornecedores, produtos e pedidos
+-- ===================================================================
+
+BEGIN;
+
+-- ===================================================================
+-- LIMPEZA INICIAL (OPCIONAL)
+-- ===================================================================
+-- Descomente se quiser resetar a sequência de IDs:
+-- TRUNCATE TABLE tb_pedido_item, tb_pedido, tb_fornecedor_produto,
+--   tb_fornecedor_campanha, tb_fornecedor_condicao, tb_fornecedor_contato,
+--   tb_fornecedor_endereco, tb_fornecedor, tb_loja_endereco, tb_loja_contato,
+--   tb_loja, tb_sistema_usuario_perfil, tb_sistema_usuario,
+--   tb_sistema_conta, tb_categoria
+-- RESTART IDENTITY CASCADE;
+
+-- ===================================================================
+-- 1️⃣ CONTAS
+-- ===================================================================
+
+INSERT INTO tb_sistema_conta (nm_conta, ativo)
+VALUES 
+  ('Central Compras', true),
+  ('Horizon Distribuidora', true)
+ON CONFLICT DO NOTHING;
+
+-- ===================================================================
+-- 2️⃣ USUÁRIOS
+-- ===================================================================
+
+INSERT INTO tb_sistema_usuario (id_conta, nome, email, senha, ativo)
+VALUES
+  (1, 'João Lojista', 'joao@loja.com', '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcg7b3XeKeUxWdeS86E36gBS/1q', true),
+  (1, 'Maria Lojista', 'maria@loja.com', '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcg7b3XeKeUxWdeS86E36gBS/1q', true),
+  (1, 'Pedro Lojista', 'pedro@loja.com', '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcg7b3XeKeUxWdeS86E36gBS/1q', true),
+  (2, 'Ana Lojista', 'ana@loja.com', '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcg7b3XeKeUxWdeS86E36gBS/1q', true),
+  (2, 'Lucas Lojista', 'lucas@loja.com', '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcg7b3XeKeUxWdeS86E36gBS/1q', true),
+  (1, 'Carlos Fornecedor', 'carlos@fornecedor.com', '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcg7b3XeKeUxWdeS86E36gBS/1q', true),
+  (1, 'Fernanda Fornecedor', 'fernanda@fornecedor.com', '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcg7b3XeKeUxWdeS86E36gBS/1q', true),
+  (1, 'Juliana Fornecedor', 'juliana@fornecedor.com', '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcg7b3XeKeUxWdeS86E36gBS/1q', true),
+  (2, 'Rafael Fornecedor', 'rafael@fornecedor.com', '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcg7b3XeKeUxWdeS86E36gBS/1q', true),
+  (2, 'Bruna Fornecedor', 'bruna@fornecedor.com', '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcg7b3XeKeUxWdeS86E36gBS/1q', true)
+ON CONFLICT (id_conta, email) DO NOTHING;
+
+-- ===================================================================
+-- 3️⃣ PERFIS DE USUÁRIO
+-- ===================================================================
+
+INSERT INTO tb_sistema_usuario_perfil (id_usuario, perfil)
+VALUES
+  (1, 'LOJISTA'),
+  (2, 'LOJISTA'),
+  (3, 'LOJISTA'),
+  (4, 'LOJISTA'),
+  (5, 'LOJISTA'),
+  (6, 'FORNECEDOR'),
+  (7, 'FORNECEDOR'),
+  (8, 'FORNECEDOR'),
+  (9, 'FORNECEDOR'),
+  (10, 'FORNECEDOR')
+ON CONFLICT (id_usuario, perfil) DO NOTHING;
+
+-- ===================================================================
+-- 4️⃣ CATEGORIAS
+-- ===================================================================
+
+INSERT INTO tb_categoria (id_conta, nome)
+VALUES
+  (1, 'Materiais de Construção'),
+  (1, 'Hidráulica'),
+  (1, 'Elétrica'),
+  (2, 'Ferragens'),
+  (2, 'Tintas')
+ON CONFLICT (id_conta, nome) DO NOTHING;
+
+-- ===================================================================
+-- 5️⃣ LOJAS
+-- ===================================================================
+
+INSERT INTO tb_loja (id_conta, id_usuario, nome_fantasia, razao_social, cnpj, ativo, termo_aceito)
+VALUES
+  (1, 1, 'Loja Alpha', 'Alpha Varejo LTDA', '11111111000191', true, true),
+  (1, 2, 'Loja Beta', 'Beta Distribuidora LTDA', '22222222000191', true, true),
+  (1, 3, 'Loja Gama', 'Gama Comércio LTDA', '33333333000191', true, true),
+  (2, 4, 'Loja Delta', 'Delta Varejo LTDA', '44444444000191', true, true),
+  (2, 5, 'Loja Epsilon', 'Epsilon Comércio LTDA', '55555555000191', true, true)
+ON CONFLICT (cnpj) DO NOTHING;
+
+-- ===================================================================
+-- 6️⃣ FORNECEDORES
+-- ===================================================================
+
+INSERT INTO tb_fornecedor (id_conta, id_usuario, nome_fantasia, razao_social, cnpj, email_fornecedor, ativo)
+VALUES
+  (1, 6, 'Quartzlit', 'Quartzlit Indústria LTDA', '66666666000191', 'contato@quartzlit.com', true),
+  (1, 7, 'Gerdau', 'Gerdau Distribuidora LTDA', '77777777000191', 'contato@gerdau.com', true),
+  (1, 8, 'Krona', 'Krona Tubos LTDA', '88888888000191', 'contato@krona.com', true),
+  (2, 9, 'Tigre', 'Tigre Indústria LTDA', '99999999000191', 'contato@tigre.com', true),
+  (2, 10, 'Deca', 'Deca Louças LTDA', '10101010000191', 'contato@deca.com', true)
+ON CONFLICT (cnpj) DO NOTHING;
+
+-- ===================================================================
+-- 7️⃣ PRODUTOS DO FORNECEDOR
+-- ===================================================================
+
+INSERT INTO tb_fornecedor_produto (id_fornecedor, id_usuario, id_conta, produto, valor_produto, tipo_embalagem)
+VALUES
+  (1, 6, 1, 'Tinta Premium 18L', 150.50, 'Lata'),
+  (1, 6, 1, 'Tinta Econômica 10L', 85.90, 'Lata'),
+  (2, 7, 1, 'Verga 10x12 Gerdau', 125.50, 'Barra'),
+  (2, 7, 1, 'Tubo Galvanizado 50mm', 78.00, 'Metro'),
+  (3, 8, 1, 'Joelho PVC 50mm', 35.60, 'Unidade'),
+  (3, 8, 1, 'Tê PVC 50mm', 42.50, 'Unidade'),
+  (4, 9, 2, 'Tubos Tigre 100mm', 250.00, 'Tubo'),
+  (4, 9, 2, 'Caixa Acoplada Tigre', 180.00, 'Unidade'),
+  (5, 10, 2, 'Torneira Luxo Deca', 220.00, 'Unidade'),
+  (5, 10, 2, 'Válvula Esfera Deca', 95.75, 'Unidade')
+ON CONFLICT DO NOTHING;
+
+-- ===================================================================
+-- 8️⃣ CONDIÇÕES COMERCIAIS
+-- ===================================================================
+
+INSERT INTO tb_fornecedor_condicao (
+  id_fornecedor, id_conta, id_usuario,
+  pedido_minimo, prazo_entrega, percentual_cashback,
+  estado, prazo_pagamento_dias
+)
+VALUES
+  (1, 1, 6, 500.00, 5, 3.0, '--', 30),
+  (2, 1, 7, 1000.00, 7, 2.5, '--', 15),
+  (3, 1, 8, 300.00, 3, 2.0, '--', 30),
+  (4, 2, 9, 800.00, 5, 3.5, '--', 30),
+  (5, 2, 10, 600.00, 7, 3.0, '--', 45)
+ON CONFLICT (id_fornecedor, estado) DO NOTHING;
+
+-- ===================================================================
+-- 9️⃣ PEDIDOS (valores menores para gráficos dinâmicos)
+-- ===================================================================
+
+INSERT INTO tb_pedido (
+  id_usuario, id_conta, id_fornecedor, id_loja,
+  status, vl_total_pedido, canal, is_televenda, dt_inc
+)
+VALUES
+  (1, 1, 1, 1, 'Pendente', 450.50, 'web', false, now() - interval '1 day'),
+  (1, 1, 2, 1, 'Aprovado', 650.75, 'web', false, now() - interval '2 days'),
+  (2, 1, 3, 2, 'Faturado', 380.90, 'web', false, now() - interval '3 days'),
+  (2, 1, 1, 2, 'Entregue', 520.20, 'web', false, now() - interval '4 days'),
+  (3, 1, 2, 3, 'Pendente', 750.00, 'web', false, now() - interval '5 days'),
+  (4, 2, 4, 4, 'Aprovado', 640.50, 'web', false, now() - interval '1 day'),
+  (4, 2, 5, 4, 'Faturado', 580.75, 'web', false, now() - interval '2 days'),
+  (5, 2, 4, 5, 'Entregue', 420.90, 'web', false, now() - interval '3 days')
+ON CONFLICT DO NOTHING;
+
+-- ===================================================================
+-- 🔟 ITENS DO PEDIDO
+-- ===================================================================
+
+INSERT INTO tb_pedido_item (
+  id_pedido, id_conta, id_fornecedor, id_loja, id_usuario,
+  produto, quantidade, valor_unitario, valor_total,
+  percentual_cashback_aplicado, valor_cashback_previsto
+)
+VALUES
+  (1, 1, 1, 1, 1, 'Tinta Premium 18L', 3, 150.50, 451.50, 3.0, 13.55),
+  (2, 1, 2, 1, 1, 'Verga 10x12 Gerdau', 5, 130.15, 650.75, 2.5, 16.27),
+  (3, 1, 3, 2, 2, 'Joelho PVC 50mm', 10, 38.09, 380.90, 2.0, 7.62),
+  (4, 1, 1, 2, 2, 'Tinta Econômica 10L', 6, 86.70, 520.20, 3.0, 15.61),
+  (5, 1, 2, 3, 3, 'Tubo Galvanizado 50mm', 9, 83.33, 750.00, 2.5, 18.75),
+  (6, 2, 4, 4, 4, 'Tubos Tigre 100mm', 2, 320.25, 640.50, 3.5, 22.42),
+  (7, 2, 5, 4, 4, 'Torneira Luxo Deca', 2, 290.38, 580.76, 3.0, 17.43),
+  (8, 2, 4, 5, 5, 'Caixa Acoplada Tigre', 2, 210.45, 420.90, 3.5, 14.73)
+ON CONFLICT DO NOTHING;
+
+COMMIT;
+
+-- ===================================================================
+-- VERIFICAÇÃO DOS DADOS INSERIDOS
+-- ===================================================================
+
+SELECT '=== CONTAS ===' as info;
+SELECT id, nm_conta, ativo FROM tb_sistema_conta ORDER BY id;
+
+SELECT '=== USUÁRIOS ===' as info;
+SELECT id, id_conta, nome, email FROM tb_sistema_usuario ORDER BY id;
+
+SELECT '=== LOJAS ===' as info;
+SELECT id, id_conta, id_usuario, nome_fantasia, cnpj FROM tb_loja ORDER BY id;
+
+SELECT '=== FORNECEDORES ===' as info;
+SELECT id, id_conta, id_usuario, nome_fantasia, cnpj FROM tb_fornecedor ORDER BY id;
+
+SELECT '=== PRODUTOS ===' as info;
+SELECT id, id_fornecedor, produto, valor_produto FROM tb_fornecedor_produto ORDER BY id;
+
+SELECT '=== PEDIDOS ===' as info;
+SELECT id, id_usuario, id_fornecedor, id_loja, status, vl_total_pedido, dt_inc FROM tb_pedido ORDER BY id DESC;
+
+SELECT '=== ITENS DO PEDIDO ===' as info;
+SELECT id, id_pedido, produto, quantidade, valor_total FROM tb_pedido_item ORDER BY id;
+
+-- ===================================================================
+-- ✅ FIM DO SCRIPT - Banco pronto com dados de teste
+-- ===================================================================

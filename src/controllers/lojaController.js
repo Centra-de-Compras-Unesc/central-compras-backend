@@ -18,7 +18,6 @@ export const getLojas = async (req, res) => {
 
     res.json(serializeBigInt(lojas));
   } catch (error) {
-    console.error("Erro no GET /lojas:", error);
     res.status(500).json({
       error: "Erro ao listar lojas",
       details: error.message,
@@ -80,7 +79,6 @@ export const createLoja = async (req, res) => {
 
     res.status(201).json(serializeBigInt(novaLoja));
   } catch (error) {
-    console.error("Erro ao criar loja:", error);
     res.status(500).json({
       error: "Erro ao criar loja",
       details: error.message,
@@ -106,7 +104,6 @@ export const updateLoja = async (req, res) => {
 
     res.json(serializeBigInt(lojaAtualizada));
   } catch (error) {
-    console.error("Erro ao atualizar loja:", error);
     res.status(500).json({
       error: "Erro ao atualizar loja",
       details: error.message,
@@ -129,7 +126,6 @@ export const deleteLoja = async (req, res) => {
 
     res.json({ message: "Loja removida com sucesso" });
   } catch (error) {
-    console.error("Erro ao deletar loja:", error);
     res.status(500).json({
       error: "Erro ao deletar loja",
       details: error.message,

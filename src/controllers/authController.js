@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../generated/prisma/index.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
@@ -16,6 +16,9 @@ export const login = async (req, res) => {
           email,
         },
       },
+      include: {
+        tb_sistema_usuario_perfil: true,
+      },
     });
 
     if (!usuario)
@@ -30,12 +33,23 @@ export const login = async (req, res) => {
     if (!senhaCorreta)
       return res.status(401).json({ message: "Senha incorreta" });
 
+    const perfis = usuario.tb_sistema_usuario_perfil.map((p) => p.perfil);
+
+    let perfilPrincipal = "loja";
+    if (perfis.includes("admin")) {
+      perfilPrincipal = "admin";
+    } else if (perfis.includes("fornecedor")) {
+      perfilPrincipal = "fornecedor";
+    }
+
     const token = jwt.sign(
       {
         id: Number(usuario.id),
         email: usuario.email,
         nome: usuario.nome,
         id_conta: Number(usuario.id_conta),
+        perfil: perfilPrincipal,
+        perfis: perfis,
       },
       SECRET,
       { expiresIn: "8h" }
@@ -44,9 +58,9 @@ export const login = async (req, res) => {
     res.json({
       message: "Login realizado com sucesso!",
       token,
+      perfil: perfilPrincipal,
     });
   } catch (error) {
-    console.error("Erro no login:", error);
     res.status(500).json({ message: "Erro ao realizar login" });
   }
 };
@@ -86,7 +100,6 @@ export const register = async (req, res) => {
       usuario: { id: novoUsuario.id, nome, email },
     });
   } catch (error) {
-    console.error("Erro no registro:", error);
     res.status(500).json({ message: "Erro ao registrar usuário" });
   }
 };

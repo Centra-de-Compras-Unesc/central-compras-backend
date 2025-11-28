@@ -34,7 +34,6 @@ export const getPedidoItens = async (req, res) => {
 
     res.json(serializeBigInt(itens));
   } catch (error) {
-    console.error("Erro no GET /pedido-itens:", error);
     res.status(500).json({
       error: "Erro ao listar itens de pedido",
       details: error.message,
@@ -59,7 +58,6 @@ export const getPedidoItemById = async (req, res) => {
 
     res.json(serializeBigInt(item));
   } catch (error) {
-    console.error("Erro no GET /pedido-itens/:id:", error);
     res.status(500).json({
       error: "Erro ao buscar item de pedido",
       details: error.message,
@@ -119,7 +117,6 @@ export const createPedidoItem = async (req, res) => {
 
     res.status(201).json(serializeBigInt(novoItem));
   } catch (error) {
-    console.error("Erro no POST /pedido-itens:", error);
     res.status(500).json({
       error: "Erro ao criar item de pedido",
       details: error.message,
@@ -144,7 +141,6 @@ export const updatePedidoItem = async (req, res) => {
 
     res.json(serializeBigInt(itemAtualizado));
   } catch (error) {
-    console.error("Erro no PUT /pedido-itens/:id:", error);
     res.status(500).json({
       error: "Erro ao atualizar item de pedido",
       details: error.message,
@@ -166,7 +162,6 @@ export const deletePedidoItem = async (req, res) => {
 
     res.json({ message: "Item de pedido removido com sucesso" });
   } catch (error) {
-    console.error("Erro no DELETE /pedido-itens/:id:", error);
     res.status(500).json({
       error: "Erro ao deletar item de pedido",
       details: error.message,

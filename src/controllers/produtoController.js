@@ -29,7 +29,6 @@ export const getProdutos = async (req, res) => {
 
     res.json(serializeBigInt(produtos));
   } catch (error) {
-    console.error("Erro no GET /produtos:", error);
     res.status(500).json({
       error: "Erro ao listar produtos",
       details: error.message,
@@ -52,7 +51,6 @@ export const getProdutoById = async (req, res) => {
 
     res.json(serializeBigInt(produto));
   } catch (error) {
-    console.error("Erro no GET /produtos/:id:", error);
     res.status(500).json({
       error: "Erro ao buscar produto",
       details: error.message,
@@ -103,7 +101,6 @@ export const createProduto = async (req, res) => {
 
     res.status(201).json(serializeBigInt(novoProduto));
   } catch (error) {
-    console.error("Erro no POST /produtos:", error);
     res.status(500).json({
       error: "Erro ao criar produto",
       details: error.message,
@@ -129,7 +126,6 @@ export const updateProduto = async (req, res) => {
 
     res.json(serializeBigInt(produtoAtualizado));
   } catch (error) {
-    console.error("Erro no PUT /produtos/:id:", error);
     res.status(500).json({
       error: "Erro ao atualizar produto",
       details: error.message,
@@ -152,7 +148,6 @@ export const deleteProduto = async (req, res) => {
 
     res.json({ message: "Produto removido com sucesso" });
   } catch (error) {
-    console.error("Erro no DELETE /produtos/:id:", error);
     res.status(500).json({
       error: "Erro ao deletar produto",
       details: error.message,

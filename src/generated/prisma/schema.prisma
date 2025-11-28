@@ -1,6 +1,7 @@
 generator client {
-  provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "darwin-arm64", "windows"]
+  output        = "../src/generated/prisma"
 }
 
 datasource db {
@@ -400,6 +401,16 @@ model tb_sistema_usuario {
   email                     String                      @db.VarChar(200)
   senha                     String                      @db.VarChar(200)
   ativo                     Boolean?                    @default(false)
+  loja                      String?                     @db.VarChar(200)
+  telefone                  String?                     @db.VarChar(20)
+  cnpj                      String?                     @db.VarChar(20)
+  cep                       String?                     @db.VarChar(10)
+  endereco                  String?                     @db.VarChar(200)
+  numero                    String?                     @db.VarChar(10)
+  bairro                    String?                     @db.VarChar(100)
+  cidade                    String?                     @db.VarChar(100)
+  estado                    String?                     @db.Char(2)
+  avatarUrl                 String?                     @db.VarChar(3000)
   tb_fornecedor             tb_fornecedor[]
   tb_fornecedor_campanha    tb_fornecedor_campanha[]
   tb_fornecedor_condicao    tb_fornecedor_condicao[]

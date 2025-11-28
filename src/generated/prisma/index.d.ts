@@ -26235,6 +26235,16 @@ export namespace Prisma {
     email: string | null
     senha: string | null
     ativo: boolean | null
+    loja: string | null
+    telefone: string | null
+    cnpj: string | null
+    cep: string | null
+    endereco: string | null
+    numero: string | null
+    bairro: string | null
+    cidade: string | null
+    estado: string | null
+    avatarUrl: string | null
   }
 
   export type Tb_sistema_usuarioMaxAggregateOutputType = {
@@ -26244,6 +26254,16 @@ export namespace Prisma {
     email: string | null
     senha: string | null
     ativo: boolean | null
+    loja: string | null
+    telefone: string | null
+    cnpj: string | null
+    cep: string | null
+    endereco: string | null
+    numero: string | null
+    bairro: string | null
+    cidade: string | null
+    estado: string | null
+    avatarUrl: string | null
   }
 
   export type Tb_sistema_usuarioCountAggregateOutputType = {
@@ -26253,6 +26273,16 @@ export namespace Prisma {
     email: number
     senha: number
     ativo: number
+    loja: number
+    telefone: number
+    cnpj: number
+    cep: number
+    endereco: number
+    numero: number
+    bairro: number
+    cidade: number
+    estado: number
+    avatarUrl: number
     _all: number
   }
 
@@ -26274,6 +26304,16 @@ export namespace Prisma {
     email?: true
     senha?: true
     ativo?: true
+    loja?: true
+    telefone?: true
+    cnpj?: true
+    cep?: true
+    endereco?: true
+    numero?: true
+    bairro?: true
+    cidade?: true
+    estado?: true
+    avatarUrl?: true
   }
 
   export type Tb_sistema_usuarioMaxAggregateInputType = {
@@ -26283,6 +26323,16 @@ export namespace Prisma {
     email?: true
     senha?: true
     ativo?: true
+    loja?: true
+    telefone?: true
+    cnpj?: true
+    cep?: true
+    endereco?: true
+    numero?: true
+    bairro?: true
+    cidade?: true
+    estado?: true
+    avatarUrl?: true
   }
 
   export type Tb_sistema_usuarioCountAggregateInputType = {
@@ -26292,6 +26342,16 @@ export namespace Prisma {
     email?: true
     senha?: true
     ativo?: true
+    loja?: true
+    telefone?: true
+    cnpj?: true
+    cep?: true
+    endereco?: true
+    numero?: true
+    bairro?: true
+    cidade?: true
+    estado?: true
+    avatarUrl?: true
     _all?: true
   }
 
@@ -26388,6 +26448,16 @@ export namespace Prisma {
     email: string
     senha: string
     ativo: boolean | null
+    loja: string | null
+    telefone: string | null
+    cnpj: string | null
+    cep: string | null
+    endereco: string | null
+    numero: string | null
+    bairro: string | null
+    cidade: string | null
+    estado: string | null
+    avatarUrl: string | null
     _count: Tb_sistema_usuarioCountAggregateOutputType | null
     _avg: Tb_sistema_usuarioAvgAggregateOutputType | null
     _sum: Tb_sistema_usuarioSumAggregateOutputType | null
@@ -26416,6 +26486,16 @@ export namespace Prisma {
     email?: boolean
     senha?: boolean
     ativo?: boolean
+    loja?: boolean
+    telefone?: boolean
+    cnpj?: boolean
+    cep?: boolean
+    endereco?: boolean
+    numero?: boolean
+    bairro?: boolean
+    cidade?: boolean
+    estado?: boolean
+    avatarUrl?: boolean
     tb_fornecedor?: boolean | tb_sistema_usuario$tb_fornecedorArgs<ExtArgs>
     tb_fornecedor_campanha?: boolean | tb_sistema_usuario$tb_fornecedor_campanhaArgs<ExtArgs>
     tb_fornecedor_condicao?: boolean | tb_sistema_usuario$tb_fornecedor_condicaoArgs<ExtArgs>
@@ -26434,6 +26514,16 @@ export namespace Prisma {
     email?: boolean
     senha?: boolean
     ativo?: boolean
+    loja?: boolean
+    telefone?: boolean
+    cnpj?: boolean
+    cep?: boolean
+    endereco?: boolean
+    numero?: boolean
+    bairro?: boolean
+    cidade?: boolean
+    estado?: boolean
+    avatarUrl?: boolean
     tb_sistema_conta?: boolean | tb_sistema_contaDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tb_sistema_usuario"]>
 
@@ -26444,6 +26534,16 @@ export namespace Prisma {
     email?: boolean
     senha?: boolean
     ativo?: boolean
+    loja?: boolean
+    telefone?: boolean
+    cnpj?: boolean
+    cep?: boolean
+    endereco?: boolean
+    numero?: boolean
+    bairro?: boolean
+    cidade?: boolean
+    estado?: boolean
+    avatarUrl?: boolean
     tb_sistema_conta?: boolean | tb_sistema_contaDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tb_sistema_usuario"]>
 
@@ -26454,9 +26554,19 @@ export namespace Prisma {
     email?: boolean
     senha?: boolean
     ativo?: boolean
+    loja?: boolean
+    telefone?: boolean
+    cnpj?: boolean
+    cep?: boolean
+    endereco?: boolean
+    numero?: boolean
+    bairro?: boolean
+    cidade?: boolean
+    estado?: boolean
+    avatarUrl?: boolean
   }
 
-  export type tb_sistema_usuarioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "id_conta" | "nome" | "email" | "senha" | "ativo", ExtArgs["result"]["tb_sistema_usuario"]>
+  export type tb_sistema_usuarioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "id_conta" | "nome" | "email" | "senha" | "ativo" | "loja" | "telefone" | "cnpj" | "cep" | "endereco" | "numero" | "bairro" | "cidade" | "estado" | "avatarUrl", ExtArgs["result"]["tb_sistema_usuario"]>
   export type tb_sistema_usuarioInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tb_fornecedor?: boolean | tb_sistema_usuario$tb_fornecedorArgs<ExtArgs>
     tb_fornecedor_campanha?: boolean | tb_sistema_usuario$tb_fornecedor_campanhaArgs<ExtArgs>
@@ -26494,6 +26604,16 @@ export namespace Prisma {
       email: string
       senha: string
       ativo: boolean | null
+      loja: string | null
+      telefone: string | null
+      cnpj: string | null
+      cep: string | null
+      endereco: string | null
+      numero: string | null
+      bairro: string | null
+      cidade: string | null
+      estado: string | null
+      avatarUrl: string | null
     }, ExtArgs["result"]["tb_sistema_usuario"]>
     composites: {}
   }
@@ -26931,6 +27051,16 @@ export namespace Prisma {
     readonly email: FieldRef<"tb_sistema_usuario", 'String'>
     readonly senha: FieldRef<"tb_sistema_usuario", 'String'>
     readonly ativo: FieldRef<"tb_sistema_usuario", 'Boolean'>
+    readonly loja: FieldRef<"tb_sistema_usuario", 'String'>
+    readonly telefone: FieldRef<"tb_sistema_usuario", 'String'>
+    readonly cnpj: FieldRef<"tb_sistema_usuario", 'String'>
+    readonly cep: FieldRef<"tb_sistema_usuario", 'String'>
+    readonly endereco: FieldRef<"tb_sistema_usuario", 'String'>
+    readonly numero: FieldRef<"tb_sistema_usuario", 'String'>
+    readonly bairro: FieldRef<"tb_sistema_usuario", 'String'>
+    readonly cidade: FieldRef<"tb_sistema_usuario", 'String'>
+    readonly estado: FieldRef<"tb_sistema_usuario", 'String'>
+    readonly avatarUrl: FieldRef<"tb_sistema_usuario", 'String'>
   }
     
 
@@ -28935,7 +29065,17 @@ export namespace Prisma {
     nome: 'nome',
     email: 'email',
     senha: 'senha',
-    ativo: 'ativo'
+    ativo: 'ativo',
+    loja: 'loja',
+    telefone: 'telefone',
+    cnpj: 'cnpj',
+    cep: 'cep',
+    endereco: 'endereco',
+    numero: 'numero',
+    bairro: 'bairro',
+    cidade: 'cidade',
+    estado: 'estado',
+    avatarUrl: 'avatarUrl'
   };
 
   export type Tb_sistema_usuarioScalarFieldEnum = (typeof Tb_sistema_usuarioScalarFieldEnum)[keyof typeof Tb_sistema_usuarioScalarFieldEnum]
@@ -30999,6 +31139,16 @@ export namespace Prisma {
     email?: StringFilter<"tb_sistema_usuario"> | string
     senha?: StringFilter<"tb_sistema_usuario"> | string
     ativo?: BoolNullableFilter<"tb_sistema_usuario"> | boolean | null
+    loja?: StringNullableFilter<"tb_sistema_usuario"> | string | null
+    telefone?: StringNullableFilter<"tb_sistema_usuario"> | string | null
+    cnpj?: StringNullableFilter<"tb_sistema_usuario"> | string | null
+    cep?: StringNullableFilter<"tb_sistema_usuario"> | string | null
+    endereco?: StringNullableFilter<"tb_sistema_usuario"> | string | null
+    numero?: StringNullableFilter<"tb_sistema_usuario"> | string | null
+    bairro?: StringNullableFilter<"tb_sistema_usuario"> | string | null
+    cidade?: StringNullableFilter<"tb_sistema_usuario"> | string | null
+    estado?: StringNullableFilter<"tb_sistema_usuario"> | string | null
+    avatarUrl?: StringNullableFilter<"tb_sistema_usuario"> | string | null
     tb_fornecedor?: Tb_fornecedorListRelationFilter
     tb_fornecedor_campanha?: Tb_fornecedor_campanhaListRelationFilter
     tb_fornecedor_condicao?: Tb_fornecedor_condicaoListRelationFilter
@@ -31016,6 +31166,16 @@ export namespace Prisma {
     email?: SortOrder
     senha?: SortOrder
     ativo?: SortOrderInput | SortOrder
+    loja?: SortOrderInput | SortOrder
+    telefone?: SortOrderInput | SortOrder
+    cnpj?: SortOrderInput | SortOrder
+    cep?: SortOrderInput | SortOrder
+    endereco?: SortOrderInput | SortOrder
+    numero?: SortOrderInput | SortOrder
+    bairro?: SortOrderInput | SortOrder
+    cidade?: SortOrderInput | SortOrder
+    estado?: SortOrderInput | SortOrder
+    avatarUrl?: SortOrderInput | SortOrder
     tb_fornecedor?: tb_fornecedorOrderByRelationAggregateInput
     tb_fornecedor_campanha?: tb_fornecedor_campanhaOrderByRelationAggregateInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoOrderByRelationAggregateInput
@@ -31037,6 +31197,16 @@ export namespace Prisma {
     email?: StringFilter<"tb_sistema_usuario"> | string
     senha?: StringFilter<"tb_sistema_usuario"> | string
     ativo?: BoolNullableFilter<"tb_sistema_usuario"> | boolean | null
+    loja?: StringNullableFilter<"tb_sistema_usuario"> | string | null
+    telefone?: StringNullableFilter<"tb_sistema_usuario"> | string | null
+    cnpj?: StringNullableFilter<"tb_sistema_usuario"> | string | null
+    cep?: StringNullableFilter<"tb_sistema_usuario"> | string | null
+    endereco?: StringNullableFilter<"tb_sistema_usuario"> | string | null
+    numero?: StringNullableFilter<"tb_sistema_usuario"> | string | null
+    bairro?: StringNullableFilter<"tb_sistema_usuario"> | string | null
+    cidade?: StringNullableFilter<"tb_sistema_usuario"> | string | null
+    estado?: StringNullableFilter<"tb_sistema_usuario"> | string | null
+    avatarUrl?: StringNullableFilter<"tb_sistema_usuario"> | string | null
     tb_fornecedor?: Tb_fornecedorListRelationFilter
     tb_fornecedor_campanha?: Tb_fornecedor_campanhaListRelationFilter
     tb_fornecedor_condicao?: Tb_fornecedor_condicaoListRelationFilter
@@ -31054,6 +31224,16 @@ export namespace Prisma {
     email?: SortOrder
     senha?: SortOrder
     ativo?: SortOrderInput | SortOrder
+    loja?: SortOrderInput | SortOrder
+    telefone?: SortOrderInput | SortOrder
+    cnpj?: SortOrderInput | SortOrder
+    cep?: SortOrderInput | SortOrder
+    endereco?: SortOrderInput | SortOrder
+    numero?: SortOrderInput | SortOrder
+    bairro?: SortOrderInput | SortOrder
+    cidade?: SortOrderInput | SortOrder
+    estado?: SortOrderInput | SortOrder
+    avatarUrl?: SortOrderInput | SortOrder
     _count?: tb_sistema_usuarioCountOrderByAggregateInput
     _avg?: tb_sistema_usuarioAvgOrderByAggregateInput
     _max?: tb_sistema_usuarioMaxOrderByAggregateInput
@@ -31071,6 +31251,16 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"tb_sistema_usuario"> | string
     senha?: StringWithAggregatesFilter<"tb_sistema_usuario"> | string
     ativo?: BoolNullableWithAggregatesFilter<"tb_sistema_usuario"> | boolean | null
+    loja?: StringNullableWithAggregatesFilter<"tb_sistema_usuario"> | string | null
+    telefone?: StringNullableWithAggregatesFilter<"tb_sistema_usuario"> | string | null
+    cnpj?: StringNullableWithAggregatesFilter<"tb_sistema_usuario"> | string | null
+    cep?: StringNullableWithAggregatesFilter<"tb_sistema_usuario"> | string | null
+    endereco?: StringNullableWithAggregatesFilter<"tb_sistema_usuario"> | string | null
+    numero?: StringNullableWithAggregatesFilter<"tb_sistema_usuario"> | string | null
+    bairro?: StringNullableWithAggregatesFilter<"tb_sistema_usuario"> | string | null
+    cidade?: StringNullableWithAggregatesFilter<"tb_sistema_usuario"> | string | null
+    estado?: StringNullableWithAggregatesFilter<"tb_sistema_usuario"> | string | null
+    avatarUrl?: StringNullableWithAggregatesFilter<"tb_sistema_usuario"> | string | null
   }
 
   export type tb_sistema_usuario_perfilWhereInput = {
@@ -33173,6 +33363,16 @@ export namespace Prisma {
     email: string
     senha: string
     ativo?: boolean | null
+    loja?: string | null
+    telefone?: string | null
+    cnpj?: string | null
+    cep?: string | null
+    endereco?: string | null
+    numero?: string | null
+    bairro?: string | null
+    cidade?: string | null
+    estado?: string | null
+    avatarUrl?: string | null
     tb_fornecedor?: tb_fornecedorCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_fornecedor_campanha?: tb_fornecedor_campanhaCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoCreateNestedManyWithoutTb_sistema_usuarioInput
@@ -33190,6 +33390,16 @@ export namespace Prisma {
     email: string
     senha: string
     ativo?: boolean | null
+    loja?: string | null
+    telefone?: string | null
+    cnpj?: string | null
+    cep?: string | null
+    endereco?: string | null
+    numero?: string | null
+    bairro?: string | null
+    cidade?: string | null
+    estado?: string | null
+    avatarUrl?: string | null
     tb_fornecedor?: tb_fornecedorUncheckedCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_fornecedor_campanha?: tb_fornecedor_campanhaUncheckedCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoUncheckedCreateNestedManyWithoutTb_sistema_usuarioInput
@@ -33205,6 +33415,16 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
     ativo?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    loja?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    cep?: NullableStringFieldUpdateOperationsInput | string | null
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    numero?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tb_fornecedor?: tb_fornecedorUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_fornecedor_campanha?: tb_fornecedor_campanhaUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoUpdateManyWithoutTb_sistema_usuarioNestedInput
@@ -33222,6 +33442,16 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
     ativo?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    loja?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    cep?: NullableStringFieldUpdateOperationsInput | string | null
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    numero?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tb_fornecedor?: tb_fornecedorUncheckedUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_fornecedor_campanha?: tb_fornecedor_campanhaUncheckedUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoUncheckedUpdateManyWithoutTb_sistema_usuarioNestedInput
@@ -33238,6 +33468,16 @@ export namespace Prisma {
     email: string
     senha: string
     ativo?: boolean | null
+    loja?: string | null
+    telefone?: string | null
+    cnpj?: string | null
+    cep?: string | null
+    endereco?: string | null
+    numero?: string | null
+    bairro?: string | null
+    cidade?: string | null
+    estado?: string | null
+    avatarUrl?: string | null
   }
 
   export type tb_sistema_usuarioUpdateManyMutationInput = {
@@ -33246,6 +33486,16 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
     ativo?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    loja?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    cep?: NullableStringFieldUpdateOperationsInput | string | null
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    numero?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type tb_sistema_usuarioUncheckedUpdateManyInput = {
@@ -33255,6 +33505,16 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
     ativo?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    loja?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    cep?: NullableStringFieldUpdateOperationsInput | string | null
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    numero?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type tb_sistema_usuario_perfilCreateInput = {
@@ -35088,6 +35348,16 @@ export namespace Prisma {
     email?: SortOrder
     senha?: SortOrder
     ativo?: SortOrder
+    loja?: SortOrder
+    telefone?: SortOrder
+    cnpj?: SortOrder
+    cep?: SortOrder
+    endereco?: SortOrder
+    numero?: SortOrder
+    bairro?: SortOrder
+    cidade?: SortOrder
+    estado?: SortOrder
+    avatarUrl?: SortOrder
   }
 
   export type tb_sistema_usuarioAvgOrderByAggregateInput = {
@@ -35102,6 +35372,16 @@ export namespace Prisma {
     email?: SortOrder
     senha?: SortOrder
     ativo?: SortOrder
+    loja?: SortOrder
+    telefone?: SortOrder
+    cnpj?: SortOrder
+    cep?: SortOrder
+    endereco?: SortOrder
+    numero?: SortOrder
+    bairro?: SortOrder
+    cidade?: SortOrder
+    estado?: SortOrder
+    avatarUrl?: SortOrder
   }
 
   export type tb_sistema_usuarioMinOrderByAggregateInput = {
@@ -35111,6 +35391,16 @@ export namespace Prisma {
     email?: SortOrder
     senha?: SortOrder
     ativo?: SortOrder
+    loja?: SortOrder
+    telefone?: SortOrder
+    cnpj?: SortOrder
+    cep?: SortOrder
+    endereco?: SortOrder
+    numero?: SortOrder
+    bairro?: SortOrder
+    cidade?: SortOrder
+    estado?: SortOrder
+    avatarUrl?: SortOrder
   }
 
   export type tb_sistema_usuarioSumOrderByAggregateInput = {
@@ -38579,6 +38869,16 @@ export namespace Prisma {
     email: string
     senha: string
     ativo?: boolean | null
+    loja?: string | null
+    telefone?: string | null
+    cnpj?: string | null
+    cep?: string | null
+    endereco?: string | null
+    numero?: string | null
+    bairro?: string | null
+    cidade?: string | null
+    estado?: string | null
+    avatarUrl?: string | null
     tb_fornecedor_campanha?: tb_fornecedor_campanhaCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_loja?: tb_lojaCreateNestedManyWithoutTb_sistema_usuarioInput
@@ -38595,6 +38895,16 @@ export namespace Prisma {
     email: string
     senha: string
     ativo?: boolean | null
+    loja?: string | null
+    telefone?: string | null
+    cnpj?: string | null
+    cep?: string | null
+    endereco?: string | null
+    numero?: string | null
+    bairro?: string | null
+    cidade?: string | null
+    estado?: string | null
+    avatarUrl?: string | null
     tb_fornecedor_campanha?: tb_fornecedor_campanhaUncheckedCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoUncheckedCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_loja?: tb_lojaUncheckedCreateNestedManyWithoutTb_sistema_usuarioInput
@@ -39108,6 +39418,16 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
     ativo?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    loja?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    cep?: NullableStringFieldUpdateOperationsInput | string | null
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    numero?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tb_fornecedor_campanha?: tb_fornecedor_campanhaUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_loja?: tb_lojaUpdateManyWithoutTb_sistema_usuarioNestedInput
@@ -39124,6 +39444,16 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
     ativo?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    loja?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    cep?: NullableStringFieldUpdateOperationsInput | string | null
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    numero?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tb_fornecedor_campanha?: tb_fornecedor_campanhaUncheckedUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoUncheckedUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_loja?: tb_lojaUncheckedUpdateManyWithoutTb_sistema_usuarioNestedInput
@@ -39549,6 +39879,16 @@ export namespace Prisma {
     email: string
     senha: string
     ativo?: boolean | null
+    loja?: string | null
+    telefone?: string | null
+    cnpj?: string | null
+    cep?: string | null
+    endereco?: string | null
+    numero?: string | null
+    bairro?: string | null
+    cidade?: string | null
+    estado?: string | null
+    avatarUrl?: string | null
     tb_fornecedor?: tb_fornecedorCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_loja?: tb_lojaCreateNestedManyWithoutTb_sistema_usuarioInput
@@ -39565,6 +39905,16 @@ export namespace Prisma {
     email: string
     senha: string
     ativo?: boolean | null
+    loja?: string | null
+    telefone?: string | null
+    cnpj?: string | null
+    cep?: string | null
+    endereco?: string | null
+    numero?: string | null
+    bairro?: string | null
+    cidade?: string | null
+    estado?: string | null
+    avatarUrl?: string | null
     tb_fornecedor?: tb_fornecedorUncheckedCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoUncheckedCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_loja?: tb_lojaUncheckedCreateNestedManyWithoutTb_sistema_usuarioInput
@@ -39785,6 +40135,16 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
     ativo?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    loja?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    cep?: NullableStringFieldUpdateOperationsInput | string | null
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    numero?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tb_fornecedor?: tb_fornecedorUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_loja?: tb_lojaUpdateManyWithoutTb_sistema_usuarioNestedInput
@@ -39801,6 +40161,16 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
     ativo?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    loja?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    cep?: NullableStringFieldUpdateOperationsInput | string | null
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    numero?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tb_fornecedor?: tb_fornecedorUncheckedUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoUncheckedUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_loja?: tb_lojaUncheckedUpdateManyWithoutTb_sistema_usuarioNestedInput
@@ -40160,6 +40530,16 @@ export namespace Prisma {
     email: string
     senha: string
     ativo?: boolean | null
+    loja?: string | null
+    telefone?: string | null
+    cnpj?: string | null
+    cep?: string | null
+    endereco?: string | null
+    numero?: string | null
+    bairro?: string | null
+    cidade?: string | null
+    estado?: string | null
+    avatarUrl?: string | null
     tb_fornecedor?: tb_fornecedorCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_fornecedor_campanha?: tb_fornecedor_campanhaCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_loja?: tb_lojaCreateNestedManyWithoutTb_sistema_usuarioInput
@@ -40176,6 +40556,16 @@ export namespace Prisma {
     email: string
     senha: string
     ativo?: boolean | null
+    loja?: string | null
+    telefone?: string | null
+    cnpj?: string | null
+    cep?: string | null
+    endereco?: string | null
+    numero?: string | null
+    bairro?: string | null
+    cidade?: string | null
+    estado?: string | null
+    avatarUrl?: string | null
     tb_fornecedor?: tb_fornecedorUncheckedCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_fornecedor_campanha?: tb_fornecedor_campanhaUncheckedCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_loja?: tb_lojaUncheckedCreateNestedManyWithoutTb_sistema_usuarioInput
@@ -40318,6 +40708,16 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
     ativo?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    loja?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    cep?: NullableStringFieldUpdateOperationsInput | string | null
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    numero?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tb_fornecedor?: tb_fornecedorUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_fornecedor_campanha?: tb_fornecedor_campanhaUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_loja?: tb_lojaUpdateManyWithoutTb_sistema_usuarioNestedInput
@@ -40334,6 +40734,16 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
     ativo?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    loja?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    cep?: NullableStringFieldUpdateOperationsInput | string | null
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    numero?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tb_fornecedor?: tb_fornecedorUncheckedUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_fornecedor_campanha?: tb_fornecedor_campanhaUncheckedUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_loja?: tb_lojaUncheckedUpdateManyWithoutTb_sistema_usuarioNestedInput
@@ -40963,6 +41373,16 @@ export namespace Prisma {
     email: string
     senha: string
     ativo?: boolean | null
+    loja?: string | null
+    telefone?: string | null
+    cnpj?: string | null
+    cep?: string | null
+    endereco?: string | null
+    numero?: string | null
+    bairro?: string | null
+    cidade?: string | null
+    estado?: string | null
+    avatarUrl?: string | null
     tb_fornecedor?: tb_fornecedorCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_fornecedor_campanha?: tb_fornecedor_campanhaCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoCreateNestedManyWithoutTb_sistema_usuarioInput
@@ -40979,6 +41399,16 @@ export namespace Prisma {
     email: string
     senha: string
     ativo?: boolean | null
+    loja?: string | null
+    telefone?: string | null
+    cnpj?: string | null
+    cep?: string | null
+    endereco?: string | null
+    numero?: string | null
+    bairro?: string | null
+    cidade?: string | null
+    estado?: string | null
+    avatarUrl?: string | null
     tb_fornecedor?: tb_fornecedorUncheckedCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_fornecedor_campanha?: tb_fornecedor_campanhaUncheckedCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoUncheckedCreateNestedManyWithoutTb_sistema_usuarioInput
@@ -41320,6 +41750,16 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
     ativo?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    loja?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    cep?: NullableStringFieldUpdateOperationsInput | string | null
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    numero?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tb_fornecedor?: tb_fornecedorUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_fornecedor_campanha?: tb_fornecedor_campanhaUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoUpdateManyWithoutTb_sistema_usuarioNestedInput
@@ -41336,6 +41776,16 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
     ativo?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    loja?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    cep?: NullableStringFieldUpdateOperationsInput | string | null
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    numero?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tb_fornecedor?: tb_fornecedorUncheckedUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_fornecedor_campanha?: tb_fornecedor_campanhaUncheckedUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoUncheckedUpdateManyWithoutTb_sistema_usuarioNestedInput
@@ -42632,6 +43082,16 @@ export namespace Prisma {
     email: string
     senha: string
     ativo?: boolean | null
+    loja?: string | null
+    telefone?: string | null
+    cnpj?: string | null
+    cep?: string | null
+    endereco?: string | null
+    numero?: string | null
+    bairro?: string | null
+    cidade?: string | null
+    estado?: string | null
+    avatarUrl?: string | null
     tb_fornecedor?: tb_fornecedorCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_fornecedor_campanha?: tb_fornecedor_campanhaCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoCreateNestedManyWithoutTb_sistema_usuarioInput
@@ -42648,6 +43108,16 @@ export namespace Prisma {
     email: string
     senha: string
     ativo?: boolean | null
+    loja?: string | null
+    telefone?: string | null
+    cnpj?: string | null
+    cep?: string | null
+    endereco?: string | null
+    numero?: string | null
+    bairro?: string | null
+    cidade?: string | null
+    estado?: string | null
+    avatarUrl?: string | null
     tb_fornecedor?: tb_fornecedorUncheckedCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_fornecedor_campanha?: tb_fornecedor_campanhaUncheckedCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoUncheckedCreateNestedManyWithoutTb_sistema_usuarioInput
@@ -42897,6 +43367,16 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
     ativo?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    loja?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    cep?: NullableStringFieldUpdateOperationsInput | string | null
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    numero?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tb_fornecedor?: tb_fornecedorUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_fornecedor_campanha?: tb_fornecedor_campanhaUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoUpdateManyWithoutTb_sistema_usuarioNestedInput
@@ -42913,6 +43393,16 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
     ativo?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    loja?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    cep?: NullableStringFieldUpdateOperationsInput | string | null
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    numero?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tb_fornecedor?: tb_fornecedorUncheckedUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_fornecedor_campanha?: tb_fornecedor_campanhaUncheckedUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoUncheckedUpdateManyWithoutTb_sistema_usuarioNestedInput
@@ -43224,6 +43714,16 @@ export namespace Prisma {
     email: string
     senha: string
     ativo?: boolean | null
+    loja?: string | null
+    telefone?: string | null
+    cnpj?: string | null
+    cep?: string | null
+    endereco?: string | null
+    numero?: string | null
+    bairro?: string | null
+    cidade?: string | null
+    estado?: string | null
+    avatarUrl?: string | null
     tb_fornecedor?: tb_fornecedorCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_fornecedor_campanha?: tb_fornecedor_campanhaCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoCreateNestedManyWithoutTb_sistema_usuarioInput
@@ -43240,6 +43740,16 @@ export namespace Prisma {
     email: string
     senha: string
     ativo?: boolean | null
+    loja?: string | null
+    telefone?: string | null
+    cnpj?: string | null
+    cep?: string | null
+    endereco?: string | null
+    numero?: string | null
+    bairro?: string | null
+    cidade?: string | null
+    estado?: string | null
+    avatarUrl?: string | null
     tb_fornecedor?: tb_fornecedorUncheckedCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_fornecedor_campanha?: tb_fornecedor_campanhaUncheckedCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoUncheckedCreateNestedManyWithoutTb_sistema_usuarioInput
@@ -43563,6 +44073,16 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
     ativo?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    loja?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    cep?: NullableStringFieldUpdateOperationsInput | string | null
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    numero?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tb_fornecedor?: tb_fornecedorUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_fornecedor_campanha?: tb_fornecedor_campanhaUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoUpdateManyWithoutTb_sistema_usuarioNestedInput
@@ -43579,6 +44099,16 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
     ativo?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    loja?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    cep?: NullableStringFieldUpdateOperationsInput | string | null
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    numero?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tb_fornecedor?: tb_fornecedorUncheckedUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_fornecedor_campanha?: tb_fornecedor_campanhaUncheckedUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoUncheckedUpdateManyWithoutTb_sistema_usuarioNestedInput
@@ -44011,6 +44541,16 @@ export namespace Prisma {
     email: string
     senha: string
     ativo?: boolean | null
+    loja?: string | null
+    telefone?: string | null
+    cnpj?: string | null
+    cep?: string | null
+    endereco?: string | null
+    numero?: string | null
+    bairro?: string | null
+    cidade?: string | null
+    estado?: string | null
+    avatarUrl?: string | null
     tb_fornecedor?: tb_fornecedorCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_fornecedor_campanha?: tb_fornecedor_campanhaCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoCreateNestedManyWithoutTb_sistema_usuarioInput
@@ -44026,6 +44566,16 @@ export namespace Prisma {
     email: string
     senha: string
     ativo?: boolean | null
+    loja?: string | null
+    telefone?: string | null
+    cnpj?: string | null
+    cep?: string | null
+    endereco?: string | null
+    numero?: string | null
+    bairro?: string | null
+    cidade?: string | null
+    estado?: string | null
+    avatarUrl?: string | null
     tb_fornecedor?: tb_fornecedorUncheckedCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_fornecedor_campanha?: tb_fornecedor_campanhaUncheckedCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoUncheckedCreateNestedManyWithoutTb_sistema_usuarioInput
@@ -44282,6 +44832,16 @@ export namespace Prisma {
     email?: StringFilter<"tb_sistema_usuario"> | string
     senha?: StringFilter<"tb_sistema_usuario"> | string
     ativo?: BoolNullableFilter<"tb_sistema_usuario"> | boolean | null
+    loja?: StringNullableFilter<"tb_sistema_usuario"> | string | null
+    telefone?: StringNullableFilter<"tb_sistema_usuario"> | string | null
+    cnpj?: StringNullableFilter<"tb_sistema_usuario"> | string | null
+    cep?: StringNullableFilter<"tb_sistema_usuario"> | string | null
+    endereco?: StringNullableFilter<"tb_sistema_usuario"> | string | null
+    numero?: StringNullableFilter<"tb_sistema_usuario"> | string | null
+    bairro?: StringNullableFilter<"tb_sistema_usuario"> | string | null
+    cidade?: StringNullableFilter<"tb_sistema_usuario"> | string | null
+    estado?: StringNullableFilter<"tb_sistema_usuario"> | string | null
+    avatarUrl?: StringNullableFilter<"tb_sistema_usuario"> | string | null
   }
 
   export type tb_fornecedorCreateWithoutTb_sistema_usuarioInput = {
@@ -44847,6 +45407,16 @@ export namespace Prisma {
     email: string
     senha: string
     ativo?: boolean | null
+    loja?: string | null
+    telefone?: string | null
+    cnpj?: string | null
+    cep?: string | null
+    endereco?: string | null
+    numero?: string | null
+    bairro?: string | null
+    cidade?: string | null
+    estado?: string | null
+    avatarUrl?: string | null
     tb_fornecedor?: tb_fornecedorCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_fornecedor_campanha?: tb_fornecedor_campanhaCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoCreateNestedManyWithoutTb_sistema_usuarioInput
@@ -44863,6 +45433,16 @@ export namespace Prisma {
     email: string
     senha: string
     ativo?: boolean | null
+    loja?: string | null
+    telefone?: string | null
+    cnpj?: string | null
+    cep?: string | null
+    endereco?: string | null
+    numero?: string | null
+    bairro?: string | null
+    cidade?: string | null
+    estado?: string | null
+    avatarUrl?: string | null
     tb_fornecedor?: tb_fornecedorUncheckedCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_fornecedor_campanha?: tb_fornecedor_campanhaUncheckedCreateNestedManyWithoutTb_sistema_usuarioInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoUncheckedCreateNestedManyWithoutTb_sistema_usuarioInput
@@ -44893,6 +45473,16 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
     ativo?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    loja?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    cep?: NullableStringFieldUpdateOperationsInput | string | null
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    numero?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tb_fornecedor?: tb_fornecedorUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_fornecedor_campanha?: tb_fornecedor_campanhaUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoUpdateManyWithoutTb_sistema_usuarioNestedInput
@@ -44909,6 +45499,16 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
     ativo?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    loja?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    cep?: NullableStringFieldUpdateOperationsInput | string | null
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    numero?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tb_fornecedor?: tb_fornecedorUncheckedUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_fornecedor_campanha?: tb_fornecedor_campanhaUncheckedUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoUncheckedUpdateManyWithoutTb_sistema_usuarioNestedInput
@@ -46631,6 +47231,16 @@ export namespace Prisma {
     email: string
     senha: string
     ativo?: boolean | null
+    loja?: string | null
+    telefone?: string | null
+    cnpj?: string | null
+    cep?: string | null
+    endereco?: string | null
+    numero?: string | null
+    bairro?: string | null
+    cidade?: string | null
+    estado?: string | null
+    avatarUrl?: string | null
   }
 
   export type tb_arquivoUpdateWithoutTb_sistema_contaInput = {
@@ -47109,6 +47719,16 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
     ativo?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    loja?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    cep?: NullableStringFieldUpdateOperationsInput | string | null
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    numero?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tb_fornecedor?: tb_fornecedorUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_fornecedor_campanha?: tb_fornecedor_campanhaUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoUpdateManyWithoutTb_sistema_usuarioNestedInput
@@ -47124,6 +47744,16 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
     ativo?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    loja?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    cep?: NullableStringFieldUpdateOperationsInput | string | null
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    numero?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tb_fornecedor?: tb_fornecedorUncheckedUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_fornecedor_campanha?: tb_fornecedor_campanhaUncheckedUpdateManyWithoutTb_sistema_usuarioNestedInput
     tb_fornecedor_condicao?: tb_fornecedor_condicaoUncheckedUpdateManyWithoutTb_sistema_usuarioNestedInput
@@ -47139,6 +47769,16 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
     ativo?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    loja?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    cep?: NullableStringFieldUpdateOperationsInput | string | null
+    endereco?: NullableStringFieldUpdateOperationsInput | string | null
+    numero?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type tb_fornecedorCreateManyTb_sistema_usuarioInput = {

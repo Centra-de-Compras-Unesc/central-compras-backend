@@ -4,6 +4,52 @@ import { PrismaClient } from "@prisma/client";
 const router = express.Router();
 const prisma = new PrismaClient();
 
+// GET /cashback - Listar todos os cashbacks com opção de filtro
+router.get("/", async (req, res) => {
+  try {
+    const { id_loja } = req.query;
+
+    // Se id_loja é fornecido, buscar cashback específico
+    if (id_loja) {
+      const cashback = await prisma.tb_loja_cashback.findFirst({
+        where: { id_loja: parseInt(id_loja) },
+      });
+
+      if (!cashback) {
+        return res.json([
+          {
+            id_loja: parseInt(id_loja),
+            saldo_disponivel: 0,
+            saldo_acumulado: 0,
+            saldo_resgatado: 0,
+            pago: false,
+            vl_realizado: 0,
+          },
+        ]);
+      }
+
+      return res.json([
+        {
+          ...cashback,
+          pago: false,
+          vl_realizado: cashback.saldo_disponivel || 0,
+        },
+      ]);
+    }
+
+    // Caso contrário, retornar todos os cashbacks
+    const todosOsCashbacks = await prisma.tb_loja_cashback.findMany();
+    res.json(
+      todosOsCashbacks.map((c) => ({
+        ...c,
+        pago: false,
+        vl_realizado: c.saldo_disponivel || 0,
+      }))
+    );
+  } catch (error) {
+    res.status(500).json({ error: "Erro ao buscar cashbacks" });
+  }
+});
 
 router.get("/saldo/:id_loja", async (req, res) => {
   const { id_loja } = req.params;
@@ -24,11 +70,9 @@ router.get("/saldo/:id_loja", async (req, res) => {
 
     res.json(saldo);
   } catch (error) {
-    console.error("Erro ao buscar saldo:", error);
     res.status(500).json({ error: "Erro ao buscar saldo de cashback" });
   }
 });
-
 
 router.get("/historico/:id_loja", async (req, res) => {
   const { id_loja } = req.params;
@@ -42,11 +86,9 @@ router.get("/historico/:id_loja", async (req, res) => {
 
     res.json(historico);
   } catch (error) {
-    console.error("Erro ao buscar histórico:", error);
     res.status(500).json({ error: "Erro ao buscar histórico de cashback" });
   }
 });
-
 
 router.post("/resgatar", async (req, res) => {
   const { id_loja, valor, conta_bancaria } = req.body;
@@ -95,11 +137,9 @@ router.post("/resgatar", async (req, res) => {
       prazo: "2 dias úteis",
     });
   } catch (error) {
-    console.error("Erro ao processar resgate:", error);
     res.status(500).json({ error: "Erro ao processar resgate" });
   }
 });
-
 
 router.post("/credito", async (req, res) => {
   const { id_loja, valor, origem } = req.body;
@@ -154,7 +194,6 @@ router.post("/credito", async (req, res) => {
       detalhe,
     });
   } catch (error) {
-    console.error("Erro ao adicionar crédito:", error);
     res.status(500).json({ error: "Erro ao adicionar crédito de cashback" });
   }
 });
