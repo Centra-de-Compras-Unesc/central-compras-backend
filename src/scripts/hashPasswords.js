@@ -8,7 +8,6 @@ async function atualizarSenhas() {
     const usuarios = await prisma.tb_sistema_usuario.findMany();
 
     for (const user of usuarios) {
-      // se a senha não for hash (bcrypt sempre começa com "$2a$" ou "$2b$")
       if (!user.senha.startsWith("$2")) {
         const novaSenhaHash = await bcrypt.hash(user.senha, 10);
         await prisma.tb_sistema_usuario.update({

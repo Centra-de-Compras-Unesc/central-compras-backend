@@ -1,8 +1,4 @@
--- ========================================
--- DADOS DE TESTE COMPLETO
--- ========================================
 
--- Limpar dados antigos
 DELETE FROM tb_loja_cashback_detalhes;
 DELETE FROM tb_loja_cashback;
 DELETE FROM tb_pedido_item;
@@ -23,23 +19,15 @@ DELETE FROM tb_sistema_usuario_perfil;
 DELETE FROM tb_sistema_usuario;
 DELETE FROM tb_sistema_conta;
 
--- ========================================
--- 1. CONTAS
--- ========================================
+
 INSERT INTO tb_sistema_conta (nm_conta, ativo, dh_inc)
 VALUES ('Central de Compras - Região Sudeste', true, NOW());
 
--- ========================================
--- 2. USUÁRIOS
--- ========================================
 INSERT INTO tb_sistema_usuario (id_conta, nome, email, senha, ativo, loja, telefone, cnpj, cep, endereco, numero, bairro, cidade, estado, avatarUrl)
 VALUES 
   (1, 'Loja Test', 'loja@test.com', '123456', true, 'Loja Central Shopping', '(11) 4000-1111', '11.111.111/0001-88', '01310100', 'Av. Paulista', '1000', 'Bela Vista', 'São Paulo', 'SP', ''),
   (1, 'Fornecedor Test', 'fornecedor@test.com', '123456', true, 'Distribuidora Brasil', '(11) 3000-1111', '12.345.678/0001-99', '02310100', 'Rua das Flores', '500', 'Consolação', 'São Paulo', 'SP', '');
 
--- ========================================
--- 3. CATEGORIAS
--- ========================================
 INSERT INTO tb_categoria (id_conta, nome, dt_inc)
 VALUES 
   (1, 'Alimentos', NOW()),
@@ -48,45 +36,30 @@ VALUES
   (1, 'Higiene Pessoal', NOW()),
   (1, 'Eletrônicos', NOW());
 
--- ========================================
--- 4. FORNECEDORES
--- ========================================
 INSERT INTO tb_fornecedor (id_conta, id_usuario, razao_social, nome_fantasia, cnpj, email_fornecedor, telefone, ativo, dt_inc)
 VALUES 
   (1, 2, 'FORNECEDOR BRASIL LTDA', 'Fornecedor Brasil', '12.345.678/0001-99', 'contato@fornecedor1.com.br', '(11) 3000-1111', true, NOW()),
   (1, 2, 'DISTRIBUIDORA NACIONAL SA', 'Distribuidora Nacional', '98.765.432/0001-11', 'vendas@distribuidora.com.br', '(21) 3000-2222', true, NOW()),
   (1, 2, 'IMPORTADORA LTDA', 'Importadora Premium', '55.123.456/0001-77', 'info@importadora.com.br', '(31) 3000-3333', true, NOW());
 
--- ========================================
--- 5. ENDEREÇOS DE FORNECEDORES
--- ========================================
 INSERT INTO tb_fornecedor_endereco (id_fornecedor, logradouro, numero, bairro, cidade, estado, cep, id_usuario, id_conta, dt_inc)
 VALUES 
   (1, 'Rua Industrial', '100', 'Zona Industrial', 'São Paulo', 'SP', '03530000', 2, 1, NOW()),
   (2, 'Avenida Brasil', '2000', 'Centro', 'Rio de Janeiro', 'RJ', '20000000', 2, 1, NOW()),
   (3, 'Estrada da Mineração', '500', 'Periférico', 'Belo Horizonte', 'MG', '30000000', 2, 1, NOW());
 
--- ========================================
--- 6. LOJAS
--- ========================================
 INSERT INTO tb_loja (id_conta, id_usuario, cnpj, nome_fantasia, razao_social, email_loja, telefone, ativo, termo_aceito, dt_inc)
 VALUES 
   (1, 1, '11.111.111/0001-88', 'Loja Central Shopping', 'LOJA CENTRAL LTDA', 'loja1@email.com.br', '(11) 4000-1111', true, true, NOW()),
   (1, 1, '22.222.222/0001-99', 'Loja Norte Plaza', 'LOJA NORTE LTDA', 'loja2@email.com.br', '(11) 4000-2222', true, true, NOW()),
   (1, 1, '33.333.333/0001-00', 'Loja West Mall', 'LOJA WEST LTDA', 'loja3@email.com.br', '(11) 4000-3333', true, true, NOW());
 
--- ========================================
--- 7. ENDEREÇOS DE LOJAS
--- ========================================
 INSERT INTO tb_loja_endereco (id_loja, logradouro, numero, bairro, cidade, estado, cep, id_usuario, id_conta, is_endereco_principal, dt_inc)
 VALUES 
   (1, 'Av. Paulista', '1000', 'Bela Vista', 'São Paulo', 'SP', '01310100', 1, 1, true, NOW()),
   (2, 'Av. Imigrantes', '2000', 'Bom Retiro', 'São Paulo', 'SP', '01310200', 1, 1, true, NOW()),
   (3, 'Rua Oscar Freire', '500', 'Cerqueira César', 'São Paulo', 'SP', '01310300', 1, 1, true, NOW());
 
--- ========================================
--- 8. PRODUTOS
--- ========================================
 INSERT INTO tb_fornecedor_produto (id_fornecedor, id_usuario, id_conta, id_categoria, codigo_produto, produto, tipo_embalagem, valor_produto, dt_inc)
 VALUES 
   (1, 2, 1, 1, 'PROD001', 'Arroz Integral 5kg', 'Saco', 45.50, NOW()),
@@ -98,27 +71,18 @@ VALUES
   (1, 2, 1, 4, 'PROD007', 'Sabonete Líquido 250ml', 'Frasco', 6.90, NOW()),
   (2, 2, 1, 4, 'PROD008', 'Shampoo 400ml', 'Frasco', 12.50, NOW());
 
--- ========================================
--- 9. CAMPANHAS
--- ========================================
 INSERT INTO tb_fornecedor_campanha (id_fornecedor, id_usuario, id_conta, descricao_campanha, valor_meta, tempo_duracao_campanha, dt_inicio, dt_fim, ativa, percentual_cashback_campanha, tipo, status, dt_inc)
 VALUES 
   (1, 2, 1, 'Black Friday - Desconto 30% em Arroz', 15000.00, 30, NOW() - INTERVAL '5 days', NOW() + INTERVAL '25 days', true, 5.00, 'Desconto', 'Ativa', NOW()),
   (2, 2, 1, 'Promoção de Inverno - Bebidas Quentes', 25000.00, 45, NOW() - INTERVAL '10 days', NOW() + INTERVAL '35 days', true, 3.50, 'Cashback', 'Ativa', NOW()),
   (3, 2, 1, 'Limpeza em Destaque', 10000.00, 20, NOW() - INTERVAL '3 days', NOW() + INTERVAL '17 days', true, 4.00, 'Desconto', 'Ativa', NOW());
 
--- ========================================
--- 10. CAMPANHAS X PRODUTOS
--- ========================================
 INSERT INTO tb_fornecedor_campanha_produto (id_conta, id_usuario, id_campanha, id_produto, preco_promocional, dt_inc)
 VALUES 
   (1, 2, 1, 1, 38.50, NOW()),
   (1, 2, 2, 3, 11.00, NOW()),
   (1, 2, 3, 5, 2.99, NOW());
 
--- ========================================
--- 11. PEDIDOS
--- ========================================
 INSERT INTO tb_pedido (id_usuario, id_conta, id_fornecedor, id_loja, status, status_norm, vl_total_pedido, canal, dt_inc)
 VALUES 
   (1, 1, 1, 1, 'Aprovado', 'Entregue', 2275.00, 'WEB', NOW() - INTERVAL '10 days'),
@@ -132,9 +96,6 @@ VALUES
   (1, 1, 1, 3, 'Aprovado', 'Entregue', 2100.00, 'WEB', NOW() - INTERVAL '7 days'),
   (1, 1, 3, 2, 'Em análise', 'Aguardando', 433.21, 'WEB', NOW() - INTERVAL '4 days');
 
--- ========================================
--- 12. ITENS DO PEDIDO
--- ========================================
 INSERT INTO tb_pedido_item (id_pedido, id_conta, id_fornecedor, id_loja, id_usuario, id_produto, quantidade, valor_unitario, valor_total, percentual_cashback_aplicado, valor_cashback_previsto, codigo_produto, produto, dt_inc)
 VALUES 
   (1, 1, 1, 1, 1, 1, 50.00, 45.50, 2275.00, 5.00, 113.75, 'PROD001', 'Arroz Integral 5kg', NOW() - INTERVAL '10 days'),
@@ -148,9 +109,6 @@ VALUES
   (9, 1, 1, 3, 1, 1, 46.15, 45.50, 2100.00, 5.00, 105.00, 'PROD001', 'Arroz Integral 5kg', NOW() - INTERVAL '7 days'),
   (10, 1, 3, 2, 1, 7, 62.81, 6.90, 433.21, 4.00, 17.33, 'PROD007', 'Sabonete Líquido 250ml', NOW() - INTERVAL '4 days');
 
--- ========================================
--- 13. CASHBACK
--- ========================================
 INSERT INTO tb_loja_cashback (id_pedido, vl_previsto, vl_realizado, id_usuario, id_conta, id_loja, id_fornecedor, pago, vl_pago, competencia, dt_inc)
 VALUES 
   (1, 113.75, 113.75, 1, 1, 1, 1, false, 0.00, NOW(), NOW() - INTERVAL '10 days'),
@@ -164,9 +122,6 @@ VALUES
   (9, 105.00, 105.00, 1, 1, 3, 1, false, 0.00, NOW(), NOW() - INTERVAL '7 days'),
   (10, 17.33, 17.33, 1, 1, 2, 3, false, 0.00, NOW(), NOW() - INTERVAL '4 days');
 
--- ========================================
--- 14. DETALHES DE CASHBACK
--- ========================================
 INSERT INTO tb_loja_cashback_detalhes (vl_previsto, vl_realizado, id_usuario, id_conta, id_loja, id_fornecedor, id_cashback, id_pedido_item, dt_inc)
 VALUES 
   (113.75, 113.75, 1, 1, 1, 1, 1, 1, NOW() - INTERVAL '10 days'),
@@ -180,9 +135,6 @@ VALUES
   (105.00, 105.00, 1, 1, 3, 1, 9, 9, NOW() - INTERVAL '7 days'),
   (17.33, 17.33, 1, 1, 2, 3, 10, 10, NOW() - INTERVAL '4 days');
 
--- ========================================
--- RESUMO DOS DADOS INSERIDOS
--- ========================================
 SELECT 
   'Contas' AS Tipo, COUNT(*) AS Quantidade
 FROM tb_sistema_conta

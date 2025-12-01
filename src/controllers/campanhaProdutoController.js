@@ -1,9 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
-/**
- * Utilitário para converter BigInt e Decimal em tipos JSON seguros
- */
 function serializeBigInt(obj) {
   return JSON.parse(
     JSON.stringify(obj, (key, value) => {

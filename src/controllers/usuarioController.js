@@ -76,7 +76,6 @@ export const createUsuario = async (req, res) => {
 
     res.status(201).json(serializeBigInt(novoUsuario));
   } catch (error) {
-    // Tratamento específico de erro de chave única (email duplicado)
     if (error.code === "P2002") {
       return res
         .status(409)
@@ -101,7 +100,6 @@ export const updateUsuario = async (req, res) => {
     if (!usuarioExistente)
       return res.status(404).json({ message: "Usuário não encontrado" });
 
-    // Filtrar apenas campos permitidos para atualização
     const {
       nome,
       email,
@@ -146,7 +144,6 @@ export const updateUsuario = async (req, res) => {
 
     res.json(serializeBigInt(usuarioAtualizado));
   } catch (error) {
-    // Tratamento específico de erro de chave única (email duplicado)
     if (error.code === "P2002") {
       return res
         .status(409)

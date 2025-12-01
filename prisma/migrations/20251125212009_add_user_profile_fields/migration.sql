@@ -1,4 +1,4 @@
--- CreateTable
+
 CREATE TABLE "tb_arquivo" (
     "id" BIGSERIAL NOT NULL,
     "id_conta" BIGINT NOT NULL,
@@ -13,7 +13,6 @@ CREATE TABLE "tb_arquivo" (
     CONSTRAINT "tb_arquivo_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
 CREATE TABLE "tb_categoria" (
     "id" BIGSERIAL NOT NULL,
     "id_conta" BIGINT NOT NULL,
@@ -23,7 +22,6 @@ CREATE TABLE "tb_categoria" (
     CONSTRAINT "tb_categoria_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
 CREATE TABLE "tb_documento_fiscal" (
     "id" BIGSERIAL NOT NULL,
     "id_conta" BIGINT NOT NULL,
@@ -41,7 +39,6 @@ CREATE TABLE "tb_documento_fiscal" (
     CONSTRAINT "tb_documento_fiscal_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
 CREATE TABLE "tb_fornecedor" (
     "id" BIGSERIAL NOT NULL,
     "id_conta" BIGINT NOT NULL,
@@ -63,7 +60,6 @@ CREATE TABLE "tb_fornecedor" (
     CONSTRAINT "tb_fornecedor_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
 CREATE TABLE "tb_fornecedor_campanha" (
     "id" BIGSERIAL NOT NULL,
     "id_fornecedor" BIGINT NOT NULL,
@@ -90,7 +86,6 @@ CREATE TABLE "tb_fornecedor_campanha" (
     CONSTRAINT "tb_fornecedor_campanha_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
 CREATE TABLE "tb_fornecedor_campanha_produto" (
     "id" BIGSERIAL NOT NULL,
     "id_conta" BIGINT NOT NULL,
@@ -103,7 +98,6 @@ CREATE TABLE "tb_fornecedor_campanha_produto" (
     CONSTRAINT "tb_fornecedor_campanha_produto_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
 CREATE TABLE "tb_fornecedor_condicao" (
     "id" BIGSERIAL NOT NULL,
     "id_fornecedor" BIGINT NOT NULL,
@@ -129,7 +123,6 @@ CREATE TABLE "tb_fornecedor_condicao" (
     CONSTRAINT "tb_fornecedor_condicao_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
 CREATE TABLE "tb_fornecedor_contato" (
     "id" BIGSERIAL NOT NULL,
     "id_fornecedor" BIGINT NOT NULL,
@@ -146,7 +139,6 @@ CREATE TABLE "tb_fornecedor_contato" (
     CONSTRAINT "tb_fornecedor_contato_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
 CREATE TABLE "tb_fornecedor_endereco" (
     "id" BIGSERIAL NOT NULL,
     "id_fornecedor" BIGINT NOT NULL,
@@ -164,7 +156,6 @@ CREATE TABLE "tb_fornecedor_endereco" (
     CONSTRAINT "tb_fornecedor_endereco_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
 CREATE TABLE "tb_fornecedor_produto" (
     "id" BIGSERIAL NOT NULL,
     "id_fornecedor" BIGINT NOT NULL,
@@ -183,7 +174,6 @@ CREATE TABLE "tb_fornecedor_produto" (
     CONSTRAINT "tb_fornecedor_produto_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
 CREATE TABLE "tb_loja" (
     "id" BIGSERIAL NOT NULL,
     "cnpj" VARCHAR(20) NOT NULL,
@@ -203,7 +193,6 @@ CREATE TABLE "tb_loja" (
     CONSTRAINT "tb_loja_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
 CREATE TABLE "tb_loja_cashback" (
     "id" BIGSERIAL NOT NULL,
     "id_pedido" BIGINT,
@@ -222,7 +211,6 @@ CREATE TABLE "tb_loja_cashback" (
     CONSTRAINT "tb_loja_cashback_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
 CREATE TABLE "tb_loja_cashback_detalhes" (
     "id" BIGSERIAL NOT NULL,
     "vl_previsto" DECIMAL(14,2) NOT NULL,
@@ -238,7 +226,6 @@ CREATE TABLE "tb_loja_cashback_detalhes" (
     CONSTRAINT "tb_loja_cashback_detalhes_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
 CREATE TABLE "tb_loja_contato" (
     "id" BIGSERIAL NOT NULL,
     "id_loja" BIGINT NOT NULL,
@@ -255,7 +242,6 @@ CREATE TABLE "tb_loja_contato" (
     CONSTRAINT "tb_loja_contato_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
 CREATE TABLE "tb_loja_endereco" (
     "id" BIGSERIAL NOT NULL,
     "id_loja" BIGINT NOT NULL,
@@ -275,7 +261,6 @@ CREATE TABLE "tb_loja_endereco" (
     CONSTRAINT "tb_loja_endereco_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
 CREATE TABLE "tb_pedido" (
     "id" BIGSERIAL NOT NULL,
     "id_usuario" BIGINT NOT NULL,
@@ -296,7 +281,6 @@ CREATE TABLE "tb_pedido" (
     CONSTRAINT "tb_pedido_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
 CREATE TABLE "tb_pedido_item" (
     "id" BIGSERIAL NOT NULL,
     "id_pedido" BIGINT NOT NULL,
@@ -319,7 +303,6 @@ CREATE TABLE "tb_pedido_item" (
     CONSTRAINT "tb_pedido_item_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
 CREATE TABLE "tb_sistema_conta" (
     "id" BIGSERIAL NOT NULL,
     "dh_inc" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -330,7 +313,6 @@ CREATE TABLE "tb_sistema_conta" (
     CONSTRAINT "tb_sistema_conta_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
 CREATE TABLE "tb_sistema_usuario" (
     "id" BIGSERIAL NOT NULL,
     "id_conta" BIGINT NOT NULL,
@@ -352,7 +334,6 @@ CREATE TABLE "tb_sistema_usuario" (
     CONSTRAINT "tb_sistema_usuario_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
 CREATE TABLE "tb_sistema_usuario_perfil" (
     "id" BIGSERIAL NOT NULL,
     "id_usuario" BIGINT NOT NULL,
@@ -361,194 +342,131 @@ CREATE TABLE "tb_sistema_usuario_perfil" (
     CONSTRAINT "tb_sistema_usuario_perfil_pkey" PRIMARY KEY ("id")
 );
 
--- CreateIndex
 CREATE INDEX "idx_arquivo_owner" ON "tb_arquivo"("owner_tipo", "owner_id");
 
--- CreateIndex
 CREATE UNIQUE INDEX "uq_categoria_conta_nome" ON "tb_categoria"("id_conta", "nome");
 
--- CreateIndex
 CREATE UNIQUE INDEX "uq_docfiscal_chave" ON "tb_documento_fiscal"("chave_nfe");
 
--- CreateIndex
 CREATE UNIQUE INDEX "uq_fornecedor_cnpj" ON "tb_fornecedor"("cnpj");
 
--- CreateIndex
 CREATE INDEX "idx_fornecedor_cnpj" ON "tb_fornecedor"("cnpj");
 
--- CreateIndex
 CREATE INDEX "idx_fornecedor_condicao_estado" ON "tb_fornecedor_condicao"("id_fornecedor", "estado");
 
--- CreateIndex
 CREATE UNIQUE INDEX "uq_fornecedor_condicao_fornecedor_estado" ON "tb_fornecedor_condicao"("id_fornecedor", "estado");
 
--- CreateIndex
 CREATE INDEX "idx_fornecedor_contato_fornecedor" ON "tb_fornecedor_contato"("id_fornecedor");
 
--- CreateIndex
 CREATE INDEX "idx_fornecedor_endereco_fornecedor" ON "tb_fornecedor_endereco"("id_fornecedor");
 
--- CreateIndex
 CREATE UNIQUE INDEX "uq_fornecedor_produto_codigo" ON "tb_fornecedor_produto"("id_fornecedor", "codigo_produto");
 
--- CreateIndex
 CREATE UNIQUE INDEX "uq_fornecedor_produto_nome" ON "tb_fornecedor_produto"("id_fornecedor", "produto");
 
--- CreateIndex
 CREATE UNIQUE INDEX "uq_loja_cnpj" ON "tb_loja"("cnpj");
 
--- CreateIndex
 CREATE INDEX "idx_loja_cnpj" ON "tb_loja"("cnpj");
 
--- CreateIndex
 CREATE INDEX "idx_loja_contato_loja" ON "tb_loja_contato"("id_loja");
 
--- CreateIndex
 CREATE INDEX "idx_pedido_fornecedor" ON "tb_pedido"("id_fornecedor", "status");
 
--- CreateIndex
 CREATE INDEX "idx_pedido_loja_dt" ON "tb_pedido"("id_loja", "dt_inc");
 
--- CreateIndex
 CREATE INDEX "idx_pedido_status_norm" ON "tb_pedido"("status_norm");
 
--- CreateIndex
 CREATE INDEX "idx_item_fornecedor_dt" ON "tb_pedido_item"("id_fornecedor", "dt_inc");
 
--- CreateIndex
 CREATE INDEX "idx_item_pedido" ON "tb_pedido_item"("id_pedido");
 
--- CreateIndex
 CREATE INDEX "idx_item_pedido_produto" ON "tb_pedido_item"("id_pedido", "id_produto");
 
--- CreateIndex
 CREATE UNIQUE INDEX "uq_usuario_email_por_conta" ON "tb_sistema_usuario"("id_conta", "email");
 
--- CreateIndex
 CREATE UNIQUE INDEX "uq_usuario_perfil" ON "tb_sistema_usuario_perfil"("id_usuario", "perfil");
 
--- AddForeignKey
+
 ALTER TABLE "tb_arquivo" ADD CONSTRAINT "fk_arquivo_conta" FOREIGN KEY ("id_conta") REFERENCES "tb_sistema_conta"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_categoria" ADD CONSTRAINT "fk_categoria_conta" FOREIGN KEY ("id_conta") REFERENCES "tb_sistema_conta"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_documento_fiscal" ADD CONSTRAINT "fk_docfiscal_conta" FOREIGN KEY ("id_conta") REFERENCES "tb_sistema_conta"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_documento_fiscal" ADD CONSTRAINT "fk_docfiscal_fornecedor" FOREIGN KEY ("id_fornecedor") REFERENCES "tb_fornecedor"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_documento_fiscal" ADD CONSTRAINT "fk_docfiscal_loja" FOREIGN KEY ("id_loja") REFERENCES "tb_loja"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_fornecedor" ADD CONSTRAINT "fk_fornecedor_conta" FOREIGN KEY ("id_conta") REFERENCES "tb_sistema_conta"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_fornecedor" ADD CONSTRAINT "fk_fornecedor_usuario" FOREIGN KEY ("id_usuario") REFERENCES "tb_sistema_usuario"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_fornecedor_campanha" ADD CONSTRAINT "fk_campanha_conta" FOREIGN KEY ("id_conta") REFERENCES "tb_sistema_conta"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_fornecedor_campanha" ADD CONSTRAINT "fk_campanha_fornecedor" FOREIGN KEY ("id_fornecedor") REFERENCES "tb_fornecedor"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_fornecedor_campanha" ADD CONSTRAINT "fk_campanha_usuario" FOREIGN KEY ("id_usuario") REFERENCES "tb_sistema_usuario"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_fornecedor_campanha_produto" ADD CONSTRAINT "fk_campanha_produto_campanha" FOREIGN KEY ("id_campanha") REFERENCES "tb_fornecedor_campanha"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_fornecedor_campanha_produto" ADD CONSTRAINT "fk_campanha_produto_produto" FOREIGN KEY ("id_produto") REFERENCES "tb_fornecedor_produto"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_fornecedor_condicao" ADD CONSTRAINT "fk_condicao_conta" FOREIGN KEY ("id_conta") REFERENCES "tb_sistema_conta"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_fornecedor_condicao" ADD CONSTRAINT "fk_condicao_fornecedor" FOREIGN KEY ("id_fornecedor") REFERENCES "tb_fornecedor"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_fornecedor_condicao" ADD CONSTRAINT "fk_condicao_usuario" FOREIGN KEY ("id_usuario") REFERENCES "tb_sistema_usuario"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_fornecedor_contato" ADD CONSTRAINT "fk_fornecedor_contato_fornecedor" FOREIGN KEY ("id_fornecedor") REFERENCES "tb_fornecedor"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_fornecedor_endereco" ADD CONSTRAINT "fk_fornecedor_endereco_fornecedor" FOREIGN KEY ("id_fornecedor") REFERENCES "tb_fornecedor"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_fornecedor_produto" ADD CONSTRAINT "fk_fornecedor_produto_categoria" FOREIGN KEY ("id_categoria") REFERENCES "tb_categoria"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_fornecedor_produto" ADD CONSTRAINT "fk_fornecedor_produto_fornecedor" FOREIGN KEY ("id_fornecedor") REFERENCES "tb_fornecedor"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_loja" ADD CONSTRAINT "fk_loja_conta" FOREIGN KEY ("id_conta") REFERENCES "tb_sistema_conta"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_loja" ADD CONSTRAINT "fk_loja_usuario" FOREIGN KEY ("id_usuario") REFERENCES "tb_sistema_usuario"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_loja_cashback" ADD CONSTRAINT "fk_cashback_conta" FOREIGN KEY ("id_conta") REFERENCES "tb_sistema_conta"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_loja_cashback" ADD CONSTRAINT "fk_cashback_fornecedor" FOREIGN KEY ("id_fornecedor") REFERENCES "tb_fornecedor"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_loja_cashback" ADD CONSTRAINT "fk_cashback_loja" FOREIGN KEY ("id_loja") REFERENCES "tb_loja"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_loja_cashback_detalhes" ADD CONSTRAINT "fk_cashback_det_cashback" FOREIGN KEY ("id_cashback") REFERENCES "tb_loja_cashback"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_loja_cashback_detalhes" ADD CONSTRAINT "fk_cashback_det_forn" FOREIGN KEY ("id_fornecedor") REFERENCES "tb_fornecedor"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_loja_cashback_detalhes" ADD CONSTRAINT "fk_cashback_det_item" FOREIGN KEY ("id_pedido_item") REFERENCES "tb_pedido_item"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_loja_cashback_detalhes" ADD CONSTRAINT "fk_cashback_det_loja" FOREIGN KEY ("id_loja") REFERENCES "tb_loja"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_loja_contato" ADD CONSTRAINT "fk_loja_contato_loja" FOREIGN KEY ("id_loja") REFERENCES "tb_loja"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_loja_endereco" ADD CONSTRAINT "fk_loja_endereco_loja" FOREIGN KEY ("id_loja") REFERENCES "tb_loja"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_pedido" ADD CONSTRAINT "fk_pedido_conta" FOREIGN KEY ("id_conta") REFERENCES "tb_sistema_conta"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_pedido" ADD CONSTRAINT "fk_pedido_fornecedor" FOREIGN KEY ("id_fornecedor") REFERENCES "tb_fornecedor"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_pedido" ADD CONSTRAINT "fk_pedido_loja" FOREIGN KEY ("id_loja") REFERENCES "tb_loja"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_pedido" ADD CONSTRAINT "fk_pedido_usuario" FOREIGN KEY ("id_usuario") REFERENCES "tb_sistema_usuario"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_pedido_item" ADD CONSTRAINT "fk_item_campanha" FOREIGN KEY ("id_campanha") REFERENCES "tb_fornecedor_campanha"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_pedido_item" ADD CONSTRAINT "fk_item_fornecedor" FOREIGN KEY ("id_fornecedor") REFERENCES "tb_fornecedor"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_pedido_item" ADD CONSTRAINT "fk_item_loja" FOREIGN KEY ("id_loja") REFERENCES "tb_loja"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_pedido_item" ADD CONSTRAINT "fk_item_pedido" FOREIGN KEY ("id_pedido") REFERENCES "tb_pedido"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_pedido_item" ADD CONSTRAINT "fk_item_produto" FOREIGN KEY ("id_produto") REFERENCES "tb_fornecedor_produto"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_pedido_item" ADD CONSTRAINT "fk_item_usuario" FOREIGN KEY ("id_usuario") REFERENCES "tb_sistema_usuario"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_sistema_usuario" ADD CONSTRAINT "fk_usuario_conta" FOREIGN KEY ("id_conta") REFERENCES "tb_sistema_conta"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- AddForeignKey
 ALTER TABLE "tb_sistema_usuario_perfil" ADD CONSTRAINT "fk_usuario_perfil_usuario" FOREIGN KEY ("id_usuario") REFERENCES "tb_sistema_usuario"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;

@@ -1,9 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
-/**
- * Função utilitária para converter BigInt em string antes de enviar como JSON
- */
 function serializeBigInt(obj) {
   return JSON.parse(
     JSON.stringify(obj, (key, value) =>

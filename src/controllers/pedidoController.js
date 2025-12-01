@@ -1,9 +1,6 @@
 import { PrismaClient } from "../generated/prisma/index.js";
 const prisma = new PrismaClient();
 
-/**
- * Função utilitária para converter BigInt e Decimal em tipos JSON seguros
- */
 function serializeBigInt(obj) {
   return JSON.parse(
     JSON.stringify(obj, (key, value) => {
@@ -21,14 +18,13 @@ function serializeBigInt(obj) {
 
 /**
  * Busca as condições comerciais do fornecedor para o estado da loja
- * @param {number|string} id_fornecedor - ID do fornecedor
- * @param {number|string} id_loja_ou_usuario - ID da loja OU do usuário (se for usuário, busca a loja associada)
+ * @param {number|string} id_fornecedor
+ * @param {number|string} id_loja_ou_usuario 
  */
 async function buscarCondicoesComerciais(id_fornecedor, id_loja_ou_usuario) {
   try {
     let loja = null;
 
-    // Primeiro tenta buscar como loja
     loja = await prisma.tb_loja.findUnique({
       where: { id: BigInt(id_loja_ou_usuario) },
       include: {
@@ -39,7 +35,6 @@ async function buscarCondicoesComerciais(id_fornecedor, id_loja_ou_usuario) {
       },
     });
 
-    // Se não encontrou como loja, tenta buscar loja pelo id_usuario
     if (!loja) {
       loja = await prisma.tb_loja.findFirst({
         where: { id_usuario: BigInt(id_loja_ou_usuario) },
@@ -54,10 +49,8 @@ async function buscarCondicoesComerciais(id_fornecedor, id_loja_ou_usuario) {
 
     if (!loja) return null;
 
-    // Pegar o estado do endereço da loja ou do usuário associado
     let estadoLoja = loja.tb_loja_endereco?.[0]?.estado;
 
-    // Se não tiver endereço, buscar do usuário
     if (!estadoLoja && loja.id_usuario) {
       const usuario = await prisma.tb_sistema_usuario.findUnique({
         where: { id: loja.id_usuario },
@@ -67,7 +60,6 @@ async function buscarCondicoesComerciais(id_fornecedor, id_loja_ou_usuario) {
 
     if (!estadoLoja) return null;
 
-    // Buscar condições do fornecedor para este estado
     const condicao = await prisma.tb_fornecedor_condicao.findFirst({
       where: {
         id_fornecedor: BigInt(id_fornecedor),
@@ -153,20 +145,17 @@ export const createPedido = async (req, res) => {
       chave_nota_fiscal,
       canal,
       is_televenda,
-      itens, // Array de itens do pedido
+      itens, 
     } = req.body;
 
-    // Validação mínima
     if (!id_usuario || !id_conta || !id_fornecedor || !id_loja)
       return res.status(400).json({
         message:
           "Campos obrigatórios ausentes (usuário, conta, fornecedor, loja).",
       });
 
-    // Buscar condições comerciais do fornecedor para o estado da loja
     const condicoes = await buscarCondicoesComerciais(id_fornecedor, id_loja);
 
-    // Criar o pedido
     const novoPedido = await prisma.tb_pedido.create({
       data: {
         id_usuario: Number(id_usuario),
@@ -184,21 +173,17 @@ export const createPedido = async (req, res) => {
       },
     });
 
-    // Se tiver itens, criar os itens do pedido com as condições aplicadas
     let itensComCondicoes = [];
     if (itens && Array.isArray(itens) && itens.length > 0) {
       for (const item of itens) {
-        // Calcular valor unitário com ajuste
         let valorUnitarioFinal = parseFloat(item.valor_unitario) || 0;
         if (condicoes?.ajuste_unitario) {
           valorUnitarioFinal += condicoes.ajuste_unitario;
         }
 
-        // Calcular valor total
         const quantidade = parseFloat(item.quantidade) || 1;
         const valorTotal = valorUnitarioFinal * quantidade;
 
-        // Calcular cashback
         const percentualCashback = condicoes?.percentual_cashback || 0;
         const valorCashback = (valorTotal * percentualCashback) / 100;
 
@@ -225,7 +210,6 @@ export const createPedido = async (req, res) => {
         itensComCondicoes.push(novoItem);
       }
 
-      // Atualizar o valor total do pedido
       const valorTotalPedido = itensComCondicoes.reduce(
         (acc, item) => acc + parseFloat(item.valor_total || 0),
         0
@@ -299,10 +283,6 @@ export const deletePedido = async (req, res) => {
   }
 };
 
-/**
- * Preview das condições comerciais que serão aplicadas ao pedido
- * GET /pedidos/condicoes-preview/:id_fornecedor/:id_loja
- */
 export const getCondicoesPreview = async (req, res) => {
   try {
     const { id_fornecedor, id_loja } = req.params;

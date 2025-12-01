@@ -1,6 +1,3 @@
-/**
- * Utilitários para serialização de tipos especiais do Prisma
- */
 
 export function serializeBigInt(obj) {
   return JSON.parse(

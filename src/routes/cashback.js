@@ -4,12 +4,10 @@ import { PrismaClient } from "@prisma/client";
 const router = express.Router();
 const prisma = new PrismaClient();
 
-// GET /cashback - Listar todos os cashbacks com opção de filtro
 router.get("/", async (req, res) => {
   try {
     const { id_loja } = req.query;
 
-    // Se id_loja é fornecido, buscar cashback específico
     if (id_loja) {
       const cashback = await prisma.tb_loja_cashback.findFirst({
         where: { id_loja: parseInt(id_loja) },
@@ -37,7 +35,6 @@ router.get("/", async (req, res) => {
       ]);
     }
 
-    // Caso contrário, retornar todos os cashbacks
     const todosOsCashbacks = await prisma.tb_loja_cashback.findMany();
     res.json(
       todosOsCashbacks.map((c) => ({
@@ -98,7 +95,6 @@ router.post("/resgatar", async (req, res) => {
   }
 
   try {
-    // Buscar saldo atual
     const saldo = await prisma.tb_loja_cashback.findFirst({
       where: { id_loja: parseInt(id_loja) },
     });
@@ -107,7 +103,6 @@ router.post("/resgatar", async (req, res) => {
       return res.status(400).json({ error: "Saldo insuficiente para resgate" });
     }
 
-    // Atualizar saldo
     const novoSaldo = await prisma.tb_loja_cashback.update({
       where: { id: saldo.id },
       data: {
@@ -117,7 +112,6 @@ router.post("/resgatar", async (req, res) => {
       },
     });
 
-    // Registrar detalhe da transação
     const detalhe = await prisma.tb_loja_cashback_detalhes.create({
       data: {
         id_loja: parseInt(id_loja),
@@ -153,7 +147,6 @@ router.post("/credito", async (req, res) => {
       where: { id_loja: parseInt(id_loja) },
     });
 
-    // Se não existe, criar novo
     if (!saldo) {
       saldo = await prisma.tb_loja_cashback.create({
         data: {
@@ -175,7 +168,6 @@ router.post("/credito", async (req, res) => {
       });
     }
 
-    // Registrar detalhe
     const detalhe = await prisma.tb_loja_cashback_detalhes.create({
       data: {
         id_loja: parseInt(id_loja),

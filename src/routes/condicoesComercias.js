@@ -7,10 +7,6 @@ import { criarCondicaoSchema, atualizarCondicaoSchema, validarDados } from "../s
 const router = express.Router();
 const prisma = new PrismaClient();
 
-/**
- * GET /condicoesComercias
- * Listar todas as condições comerciais do fornecedor autenticado
- */
 router.get("/", authMiddleware, async (req, res) => {
   try {
     const { id_usuario, id_conta } = req.user;
@@ -37,7 +33,6 @@ router.get("/", authMiddleware, async (req, res) => {
       orderBy: { estado: "asc" },
     });
 
-    // Converter BigInt para string
     const result = condicoes.map((c) => ({
       ...c,
       id: c.id.toString(),
@@ -57,10 +52,6 @@ router.get("/", authMiddleware, async (req, res) => {
   }
 });
 
-/**
- * GET /condicoesComercias/estado/:uf
- * Listar condições por estado (filtrado para fornecedor autenticado)
- */
 router.get("/estado/:uf", authMiddleware, async (req, res) => {
   try {
     const { uf } = req.params;
@@ -103,10 +94,6 @@ router.get("/estado/:uf", authMiddleware, async (req, res) => {
   }
 });
 
-/**
- * GET /condicoesComercias/:id
- * Obter uma condição específica (com validação de propriedade)
- */
 router.get("/:id", authMiddleware, validateFornecedorOwnership, async (req, res) => {
   try {
     const { id } = req.params;
@@ -146,10 +133,6 @@ router.get("/:id", authMiddleware, validateFornecedorOwnership, async (req, res)
   }
 });
 
-/**
- * POST /condicoesComercias
- * Criar uma nova condição comercial
- */
 router.post("/", authMiddleware, async (req, res) => {
   try {
     const { id_usuario, id_conta, id_fornecedor } = req.user;
@@ -159,7 +142,6 @@ router.post("/", authMiddleware, async (req, res) => {
       return res.status(400).json({ error: "Dados de usuário incompletos" });
     }
 
-    // Validar dados usando schema
     const validacao = validarDados(body, criarCondicaoSchema);
     if (!validacao.isValid) {
       return res.status(400).json({ error: validacao.error });
@@ -212,24 +194,18 @@ router.post("/", authMiddleware, async (req, res) => {
   }
 });
 
-/**
- * PUT /condicoesComercias/:id
- * Atualizar uma condição comercial (com validação de propriedade)
- */
 router.put("/:id", authMiddleware, validateFornecedorOwnership, async (req, res) => {
   try {
     const { id } = req.params;
     const body = req.body;
 
-    // Validar dados usando schema (permitindo campos opcionais)
     const validacao = validarDados(body, atualizarCondicaoSchema);
     if (!validacao.isValid) {
       return res.status(400).json({ error: validacao.error });
     }
 
     const dados = {};
-    
-    // Apenas incluir campos que foram enviados
+
     if (body.estado) dados.estado = body.estado.toUpperCase();
     if (body.percentual_cashback !== undefined && body.percentual_cashback !== null) dados.percentual_cashback = body.percentual_cashback;
     if (body.prazo_pagamento_dias !== undefined && body.prazo_pagamento_dias !== null) dados.prazo_pagamento_dias = body.prazo_pagamento_dias;
@@ -275,10 +251,6 @@ router.put("/:id", authMiddleware, validateFornecedorOwnership, async (req, res)
   }
 });
 
-/**
- * DELETE /condicoesComercias/:id
- * Deletar uma condição comercial (com validação de propriedade)
- */
 router.delete("/:id", authMiddleware, validateFornecedorOwnership, async (req, res) => {
   try {
     const { id } = req.params;

@@ -1,6 +1,4 @@
-/**
- * Middleware global para tratar BigInt em respostas JSON
- */
+
 export const jsonBigIntMiddleware = (req, res, next) => {
   const originalJson = res.json;
 

@@ -1,6 +1,3 @@
-/**
- * Schema de Validação para Condições Comerciais
- */
 
 export const criarCondicaoSchema = {
   estado: { required: true, type: "string", minLength: 2, maxLength: 2 },

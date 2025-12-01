@@ -33,7 +33,6 @@ async function seedHistoricoVendas() {
           fornecedores[Math.floor(Math.random() * fornecedores.length)];
         const status = statuses[Math.floor(Math.random() * statuses.length)];
 
-        // Valor entre R$ 50 e R$ 800
         const valor = Math.floor(Math.random() * 750) + 50;
 
         try {
