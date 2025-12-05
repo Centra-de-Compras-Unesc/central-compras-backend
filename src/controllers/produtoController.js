@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../generated/prisma/index.js";
 const prisma = new PrismaClient();
 
 function serializeBigInt(obj) {
@@ -41,7 +41,7 @@ export const getProdutoById = async (req, res) => {
     const produto = await prisma.tb_fornecedor_produto.findUnique({
       where: { id: Number(req.params.id) },
       include: {
-        tb_categoria: { select: { id: true, nome: true } }, 
+        tb_categoria: { select: { id: true, nome: true } },
         tb_fornecedor: { select: { id: true, nome_fantasia: true } },
       },
     });

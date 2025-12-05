@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../generated/prisma/index.js";
 const prisma = new PrismaClient();
 
 function serializeBigInt(obj) {
@@ -16,10 +16,17 @@ function serializeBigInt(obj) {
   );
 }
 
-
 export const getCampanhas = async (req, res) => {
   try {
+    const { id_fornecedor } = req.query;
+
+    const where = {};
+    if (id_fornecedor) {
+      where.id_fornecedor = Number(id_fornecedor);
+    }
+
     const campanhas = await prisma.tb_fornecedor_campanha.findMany({
+      where,
       orderBy: { id: "asc" },
       take: 100,
       include: {
@@ -36,7 +43,6 @@ export const getCampanhas = async (req, res) => {
     });
   }
 };
-
 
 export const getCampanhaById = async (req, res) => {
   try {
@@ -60,7 +66,6 @@ export const getCampanhaById = async (req, res) => {
   }
 };
 
-
 export const createCampanha = async (req, res) => {
   try {
     const {
@@ -83,9 +88,7 @@ export const createCampanha = async (req, res) => {
     } = req.body;
 
     if (!id_fornecedor || !id_usuario || !id_conta || !descricao_campanha)
-      return res
-        .status(400)
-        .json({ message: "Campos obrigatórios ausentes." });
+      return res.status(400).json({ message: "Campos obrigatórios ausentes." });
 
     const novaCampanha = await prisma.tb_fornecedor_campanha.create({
       data: {
@@ -122,7 +125,6 @@ export const createCampanha = async (req, res) => {
   }
 };
 
-
 export const updateCampanha = async (req, res) => {
   try {
     const id = Number(req.params.id);
@@ -147,7 +149,6 @@ export const updateCampanha = async (req, res) => {
     });
   }
 };
-
 
 export const deleteCampanha = async (req, res) => {
   try {

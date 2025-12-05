@@ -271,6 +271,7 @@ exports.Prisma.Tb_fornecedor_produtoScalarFieldEnum = {
   codigo_referencia: 'codigo_referencia',
   tipo_embalagem: 'tipo_embalagem',
   valor_produto: 'valor_produto',
+  estoque: 'estoque',
   foto: 'foto',
   dt_inc: 'dt_inc'
 };

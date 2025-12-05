@@ -4,15 +4,15 @@ const prisma = new PrismaClient();
 
 export const validateFornecedorOwnership = async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const { id_usuario } = req.user; 
+    const { id: condicaoId } = req.params;
+    const { id: usuarioId } = req.user;
 
-    if (!id || !id_usuario) {
+    if (!condicaoId || !usuarioId) {
       return res.status(400).json({ error: "Parâmetros inválidos" });
     }
 
     const condicao = await prisma.tb_fornecedor_condicao.findUnique({
-      where: { id: BigInt(id) },
+      where: { id: BigInt(condicaoId) },
       include: {
         tb_fornecedor: {
           select: { id_usuario: true },
@@ -24,9 +24,10 @@ export const validateFornecedorOwnership = async (req, res, next) => {
       return res.status(404).json({ error: "Condição não encontrada" });
     }
 
-    if (condicao.tb_fornecedor.id_usuario !== BigInt(id_usuario)) {
+    if (condicao.tb_fornecedor.id_usuario !== BigInt(usuarioId)) {
       return res.status(403).json({
-        error: "Acesso negado: você não tem permissão para modificar esta condição",
+        error:
+          "Acesso negado: você não tem permissão para modificar esta condição",
       });
     }
 

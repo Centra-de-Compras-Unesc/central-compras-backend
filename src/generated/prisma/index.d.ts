@@ -14498,6 +14498,7 @@ export namespace Prisma {
     id_conta: number | null
     id_categoria: number | null
     valor_produto: Decimal | null
+    estoque: number | null
   }
 
   export type Tb_fornecedor_produtoSumAggregateOutputType = {
@@ -14507,6 +14508,7 @@ export namespace Prisma {
     id_conta: bigint | null
     id_categoria: bigint | null
     valor_produto: Decimal | null
+    estoque: number | null
   }
 
   export type Tb_fornecedor_produtoMinAggregateOutputType = {
@@ -14521,6 +14523,7 @@ export namespace Prisma {
     codigo_referencia: string | null
     tipo_embalagem: string | null
     valor_produto: Decimal | null
+    estoque: number | null
     foto: Uint8Array | null
     dt_inc: Date | null
   }
@@ -14537,6 +14540,7 @@ export namespace Prisma {
     codigo_referencia: string | null
     tipo_embalagem: string | null
     valor_produto: Decimal | null
+    estoque: number | null
     foto: Uint8Array | null
     dt_inc: Date | null
   }
@@ -14553,6 +14557,7 @@ export namespace Prisma {
     codigo_referencia: number
     tipo_embalagem: number
     valor_produto: number
+    estoque: number
     foto: number
     dt_inc: number
     _all: number
@@ -14566,6 +14571,7 @@ export namespace Prisma {
     id_conta?: true
     id_categoria?: true
     valor_produto?: true
+    estoque?: true
   }
 
   export type Tb_fornecedor_produtoSumAggregateInputType = {
@@ -14575,6 +14581,7 @@ export namespace Prisma {
     id_conta?: true
     id_categoria?: true
     valor_produto?: true
+    estoque?: true
   }
 
   export type Tb_fornecedor_produtoMinAggregateInputType = {
@@ -14589,6 +14596,7 @@ export namespace Prisma {
     codigo_referencia?: true
     tipo_embalagem?: true
     valor_produto?: true
+    estoque?: true
     foto?: true
     dt_inc?: true
   }
@@ -14605,6 +14613,7 @@ export namespace Prisma {
     codigo_referencia?: true
     tipo_embalagem?: true
     valor_produto?: true
+    estoque?: true
     foto?: true
     dt_inc?: true
   }
@@ -14621,6 +14630,7 @@ export namespace Prisma {
     codigo_referencia?: true
     tipo_embalagem?: true
     valor_produto?: true
+    estoque?: true
     foto?: true
     dt_inc?: true
     _all?: true
@@ -14724,6 +14734,7 @@ export namespace Prisma {
     codigo_referencia: string | null
     tipo_embalagem: string | null
     valor_produto: Decimal
+    estoque: number
     foto: Uint8Array | null
     dt_inc: Date
     _count: Tb_fornecedor_produtoCountAggregateOutputType | null
@@ -14759,6 +14770,7 @@ export namespace Prisma {
     codigo_referencia?: boolean
     tipo_embalagem?: boolean
     valor_produto?: boolean
+    estoque?: boolean
     foto?: boolean
     dt_inc?: boolean
     tb_fornecedor_campanha_produto?: boolean | tb_fornecedor_produto$tb_fornecedor_campanha_produtoArgs<ExtArgs>
@@ -14780,6 +14792,7 @@ export namespace Prisma {
     codigo_referencia?: boolean
     tipo_embalagem?: boolean
     valor_produto?: boolean
+    estoque?: boolean
     foto?: boolean
     dt_inc?: boolean
     tb_categoria?: boolean | tb_fornecedor_produto$tb_categoriaArgs<ExtArgs>
@@ -14798,6 +14811,7 @@ export namespace Prisma {
     codigo_referencia?: boolean
     tipo_embalagem?: boolean
     valor_produto?: boolean
+    estoque?: boolean
     foto?: boolean
     dt_inc?: boolean
     tb_categoria?: boolean | tb_fornecedor_produto$tb_categoriaArgs<ExtArgs>
@@ -14816,11 +14830,12 @@ export namespace Prisma {
     codigo_referencia?: boolean
     tipo_embalagem?: boolean
     valor_produto?: boolean
+    estoque?: boolean
     foto?: boolean
     dt_inc?: boolean
   }
 
-  export type tb_fornecedor_produtoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "id_fornecedor" | "id_usuario" | "id_conta" | "id_categoria" | "codigo_produto" | "produto" | "gtin" | "codigo_referencia" | "tipo_embalagem" | "valor_produto" | "foto" | "dt_inc", ExtArgs["result"]["tb_fornecedor_produto"]>
+  export type tb_fornecedor_produtoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "id_fornecedor" | "id_usuario" | "id_conta" | "id_categoria" | "codigo_produto" | "produto" | "gtin" | "codigo_referencia" | "tipo_embalagem" | "valor_produto" | "estoque" | "foto" | "dt_inc", ExtArgs["result"]["tb_fornecedor_produto"]>
   export type tb_fornecedor_produtoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tb_fornecedor_campanha_produto?: boolean | tb_fornecedor_produto$tb_fornecedor_campanha_produtoArgs<ExtArgs>
     tb_categoria?: boolean | tb_fornecedor_produto$tb_categoriaArgs<ExtArgs>
@@ -14857,6 +14872,7 @@ export namespace Prisma {
       codigo_referencia: string | null
       tipo_embalagem: string | null
       valor_produto: Prisma.Decimal
+      estoque: number
       foto: Uint8Array | null
       dt_inc: Date
     }, ExtArgs["result"]["tb_fornecedor_produto"]>
@@ -15297,6 +15313,7 @@ export namespace Prisma {
     readonly codigo_referencia: FieldRef<"tb_fornecedor_produto", 'String'>
     readonly tipo_embalagem: FieldRef<"tb_fornecedor_produto", 'String'>
     readonly valor_produto: FieldRef<"tb_fornecedor_produto", 'Decimal'>
+    readonly estoque: FieldRef<"tb_fornecedor_produto", 'Int'>
     readonly foto: FieldRef<"tb_fornecedor_produto", 'Bytes'>
     readonly dt_inc: FieldRef<"tb_fornecedor_produto", 'DateTime'>
   }
@@ -28905,6 +28922,7 @@ export namespace Prisma {
     codigo_referencia: 'codigo_referencia',
     tipo_embalagem: 'tipo_embalagem',
     valor_produto: 'valor_produto',
+    estoque: 'estoque',
     foto: 'foto',
     dt_inc: 'dt_inc'
   };
@@ -30186,6 +30204,7 @@ export namespace Prisma {
     codigo_referencia?: StringNullableFilter<"tb_fornecedor_produto"> | string | null
     tipo_embalagem?: StringNullableFilter<"tb_fornecedor_produto"> | string | null
     valor_produto?: DecimalFilter<"tb_fornecedor_produto"> | Decimal | DecimalJsLike | number | string
+    estoque?: IntFilter<"tb_fornecedor_produto"> | number
     foto?: BytesNullableFilter<"tb_fornecedor_produto"> | Uint8Array | null
     dt_inc?: DateTimeFilter<"tb_fornecedor_produto"> | Date | string
     tb_fornecedor_campanha_produto?: Tb_fornecedor_campanha_produtoListRelationFilter
@@ -30206,6 +30225,7 @@ export namespace Prisma {
     codigo_referencia?: SortOrderInput | SortOrder
     tipo_embalagem?: SortOrderInput | SortOrder
     valor_produto?: SortOrder
+    estoque?: SortOrder
     foto?: SortOrderInput | SortOrder
     dt_inc?: SortOrder
     tb_fornecedor_campanha_produto?: tb_fornecedor_campanha_produtoOrderByRelationAggregateInput
@@ -30231,6 +30251,7 @@ export namespace Prisma {
     codigo_referencia?: StringNullableFilter<"tb_fornecedor_produto"> | string | null
     tipo_embalagem?: StringNullableFilter<"tb_fornecedor_produto"> | string | null
     valor_produto?: DecimalFilter<"tb_fornecedor_produto"> | Decimal | DecimalJsLike | number | string
+    estoque?: IntFilter<"tb_fornecedor_produto"> | number
     foto?: BytesNullableFilter<"tb_fornecedor_produto"> | Uint8Array | null
     dt_inc?: DateTimeFilter<"tb_fornecedor_produto"> | Date | string
     tb_fornecedor_campanha_produto?: Tb_fornecedor_campanha_produtoListRelationFilter
@@ -30251,6 +30272,7 @@ export namespace Prisma {
     codigo_referencia?: SortOrderInput | SortOrder
     tipo_embalagem?: SortOrderInput | SortOrder
     valor_produto?: SortOrder
+    estoque?: SortOrder
     foto?: SortOrderInput | SortOrder
     dt_inc?: SortOrder
     _count?: tb_fornecedor_produtoCountOrderByAggregateInput
@@ -30275,6 +30297,7 @@ export namespace Prisma {
     codigo_referencia?: StringNullableWithAggregatesFilter<"tb_fornecedor_produto"> | string | null
     tipo_embalagem?: StringNullableWithAggregatesFilter<"tb_fornecedor_produto"> | string | null
     valor_produto?: DecimalWithAggregatesFilter<"tb_fornecedor_produto"> | Decimal | DecimalJsLike | number | string
+    estoque?: IntWithAggregatesFilter<"tb_fornecedor_produto"> | number
     foto?: BytesNullableWithAggregatesFilter<"tb_fornecedor_produto"> | Uint8Array | null
     dt_inc?: DateTimeWithAggregatesFilter<"tb_fornecedor_produto"> | Date | string
   }
@@ -32329,6 +32352,7 @@ export namespace Prisma {
     codigo_referencia?: string | null
     tipo_embalagem?: string | null
     valor_produto: Decimal | DecimalJsLike | number | string
+    estoque?: number
     foto?: Uint8Array | null
     dt_inc?: Date | string
     tb_fornecedor_campanha_produto?: tb_fornecedor_campanha_produtoCreateNestedManyWithoutTb_fornecedor_produtoInput
@@ -32349,6 +32373,7 @@ export namespace Prisma {
     codigo_referencia?: string | null
     tipo_embalagem?: string | null
     valor_produto: Decimal | DecimalJsLike | number | string
+    estoque?: number
     foto?: Uint8Array | null
     dt_inc?: Date | string
     tb_fornecedor_campanha_produto?: tb_fornecedor_campanha_produtoUncheckedCreateNestedManyWithoutTb_fornecedor_produtoInput
@@ -32365,6 +32390,7 @@ export namespace Prisma {
     codigo_referencia?: NullableStringFieldUpdateOperationsInput | string | null
     tipo_embalagem?: NullableStringFieldUpdateOperationsInput | string | null
     valor_produto?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    estoque?: IntFieldUpdateOperationsInput | number
     foto?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
     dt_inc?: DateTimeFieldUpdateOperationsInput | Date | string
     tb_fornecedor_campanha_produto?: tb_fornecedor_campanha_produtoUpdateManyWithoutTb_fornecedor_produtoNestedInput
@@ -32385,6 +32411,7 @@ export namespace Prisma {
     codigo_referencia?: NullableStringFieldUpdateOperationsInput | string | null
     tipo_embalagem?: NullableStringFieldUpdateOperationsInput | string | null
     valor_produto?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    estoque?: IntFieldUpdateOperationsInput | number
     foto?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
     dt_inc?: DateTimeFieldUpdateOperationsInput | Date | string
     tb_fornecedor_campanha_produto?: tb_fornecedor_campanha_produtoUncheckedUpdateManyWithoutTb_fornecedor_produtoNestedInput
@@ -32403,6 +32430,7 @@ export namespace Prisma {
     codigo_referencia?: string | null
     tipo_embalagem?: string | null
     valor_produto: Decimal | DecimalJsLike | number | string
+    estoque?: number
     foto?: Uint8Array | null
     dt_inc?: Date | string
   }
@@ -32417,6 +32445,7 @@ export namespace Prisma {
     codigo_referencia?: NullableStringFieldUpdateOperationsInput | string | null
     tipo_embalagem?: NullableStringFieldUpdateOperationsInput | string | null
     valor_produto?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    estoque?: IntFieldUpdateOperationsInput | number
     foto?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
     dt_inc?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -32433,6 +32462,7 @@ export namespace Prisma {
     codigo_referencia?: NullableStringFieldUpdateOperationsInput | string | null
     tipo_embalagem?: NullableStringFieldUpdateOperationsInput | string | null
     valor_produto?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    estoque?: IntFieldUpdateOperationsInput | number
     foto?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
     dt_inc?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -34580,6 +34610,17 @@ export namespace Prisma {
     not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type Tb_categoriaNullableScalarRelationFilter = {
     is?: tb_categoriaWhereInput | null
     isNot?: tb_categoriaWhereInput | null
@@ -34607,6 +34648,7 @@ export namespace Prisma {
     codigo_referencia?: SortOrder
     tipo_embalagem?: SortOrder
     valor_produto?: SortOrder
+    estoque?: SortOrder
     foto?: SortOrder
     dt_inc?: SortOrder
   }
@@ -34618,6 +34660,7 @@ export namespace Prisma {
     id_conta?: SortOrder
     id_categoria?: SortOrder
     valor_produto?: SortOrder
+    estoque?: SortOrder
   }
 
   export type tb_fornecedor_produtoMaxOrderByAggregateInput = {
@@ -34632,6 +34675,7 @@ export namespace Prisma {
     codigo_referencia?: SortOrder
     tipo_embalagem?: SortOrder
     valor_produto?: SortOrder
+    estoque?: SortOrder
     foto?: SortOrder
     dt_inc?: SortOrder
   }
@@ -34648,6 +34692,7 @@ export namespace Prisma {
     codigo_referencia?: SortOrder
     tipo_embalagem?: SortOrder
     valor_produto?: SortOrder
+    estoque?: SortOrder
     foto?: SortOrder
     dt_inc?: SortOrder
   }
@@ -34659,6 +34704,7 @@ export namespace Prisma {
     id_conta?: SortOrder
     id_categoria?: SortOrder
     valor_produto?: SortOrder
+    estoque?: SortOrder
   }
 
   export type BigIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -34691,6 +34737,22 @@ export namespace Prisma {
     _sum?: NestedDecimalFilter<$PrismaModel>
     _min?: NestedDecimalFilter<$PrismaModel>
     _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type BoolFilter<$PrismaModel = never> = {
@@ -36319,6 +36381,14 @@ export namespace Prisma {
     decrement?: Decimal | DecimalJsLike | number | string
     multiply?: Decimal | DecimalJsLike | number | string
     divide?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type tb_fornecedor_campanha_produtoUpdateManyWithoutTb_fornecedor_produtoNestedInput = {
@@ -38206,6 +38276,22 @@ export namespace Prisma {
     _max?: NestedDecimalFilter<$PrismaModel>
   }
 
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
   export type NestedBoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
@@ -38352,6 +38438,7 @@ export namespace Prisma {
     codigo_referencia?: string | null
     tipo_embalagem?: string | null
     valor_produto: Decimal | DecimalJsLike | number | string
+    estoque?: number
     foto?: Uint8Array | null
     dt_inc?: Date | string
     tb_fornecedor_campanha_produto?: tb_fornecedor_campanha_produtoCreateNestedManyWithoutTb_fornecedor_produtoInput
@@ -38370,6 +38457,7 @@ export namespace Prisma {
     codigo_referencia?: string | null
     tipo_embalagem?: string | null
     valor_produto: Decimal | DecimalJsLike | number | string
+    estoque?: number
     foto?: Uint8Array | null
     dt_inc?: Date | string
     tb_fornecedor_campanha_produto?: tb_fornecedor_campanha_produtoUncheckedCreateNestedManyWithoutTb_fornecedor_produtoInput
@@ -38462,6 +38550,7 @@ export namespace Prisma {
     codigo_referencia?: StringNullableFilter<"tb_fornecedor_produto"> | string | null
     tipo_embalagem?: StringNullableFilter<"tb_fornecedor_produto"> | string | null
     valor_produto?: DecimalFilter<"tb_fornecedor_produto"> | Decimal | DecimalJsLike | number | string
+    estoque?: IntFilter<"tb_fornecedor_produto"> | number
     foto?: BytesNullableFilter<"tb_fornecedor_produto"> | Uint8Array | null
     dt_inc?: DateTimeFilter<"tb_fornecedor_produto"> | Date | string
   }
@@ -39116,6 +39205,7 @@ export namespace Prisma {
     codigo_referencia?: string | null
     tipo_embalagem?: string | null
     valor_produto: Decimal | DecimalJsLike | number | string
+    estoque?: number
     foto?: Uint8Array | null
     dt_inc?: Date | string
     tb_fornecedor_campanha_produto?: tb_fornecedor_campanha_produtoCreateNestedManyWithoutTb_fornecedor_produtoInput
@@ -39134,6 +39224,7 @@ export namespace Prisma {
     codigo_referencia?: string | null
     tipo_embalagem?: string | null
     valor_produto: Decimal | DecimalJsLike | number | string
+    estoque?: number
     foto?: Uint8Array | null
     dt_inc?: Date | string
     tb_fornecedor_campanha_produto?: tb_fornecedor_campanha_produtoUncheckedCreateNestedManyWithoutTb_fornecedor_produtoInput
@@ -40289,6 +40380,7 @@ export namespace Prisma {
     codigo_referencia?: string | null
     tipo_embalagem?: string | null
     valor_produto: Decimal | DecimalJsLike | number | string
+    estoque?: number
     foto?: Uint8Array | null
     dt_inc?: Date | string
     tb_categoria?: tb_categoriaCreateNestedOneWithoutTb_fornecedor_produtoInput
@@ -40308,6 +40400,7 @@ export namespace Prisma {
     codigo_referencia?: string | null
     tipo_embalagem?: string | null
     valor_produto: Decimal | DecimalJsLike | number | string
+    estoque?: number
     foto?: Uint8Array | null
     dt_inc?: Date | string
     tb_pedido_item?: tb_pedido_itemUncheckedCreateNestedManyWithoutTb_fornecedor_produtoInput
@@ -40400,6 +40493,7 @@ export namespace Prisma {
     codigo_referencia?: NullableStringFieldUpdateOperationsInput | string | null
     tipo_embalagem?: NullableStringFieldUpdateOperationsInput | string | null
     valor_produto?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    estoque?: IntFieldUpdateOperationsInput | number
     foto?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
     dt_inc?: DateTimeFieldUpdateOperationsInput | Date | string
     tb_categoria?: tb_categoriaUpdateOneWithoutTb_fornecedor_produtoNestedInput
@@ -40419,6 +40513,7 @@ export namespace Prisma {
     codigo_referencia?: NullableStringFieldUpdateOperationsInput | string | null
     tipo_embalagem?: NullableStringFieldUpdateOperationsInput | string | null
     valor_produto?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    estoque?: IntFieldUpdateOperationsInput | number
     foto?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
     dt_inc?: DateTimeFieldUpdateOperationsInput | Date | string
     tb_pedido_item?: tb_pedido_itemUncheckedUpdateManyWithoutTb_fornecedor_produtoNestedInput
@@ -43679,6 +43774,7 @@ export namespace Prisma {
     codigo_referencia?: string | null
     tipo_embalagem?: string | null
     valor_produto: Decimal | DecimalJsLike | number | string
+    estoque?: number
     foto?: Uint8Array | null
     dt_inc?: Date | string
     tb_fornecedor_campanha_produto?: tb_fornecedor_campanha_produtoCreateNestedManyWithoutTb_fornecedor_produtoInput
@@ -43698,6 +43794,7 @@ export namespace Prisma {
     codigo_referencia?: string | null
     tipo_embalagem?: string | null
     valor_produto: Decimal | DecimalJsLike | number | string
+    estoque?: number
     foto?: Uint8Array | null
     dt_inc?: Date | string
     tb_fornecedor_campanha_produto?: tb_fornecedor_campanha_produtoUncheckedCreateNestedManyWithoutTb_fornecedor_produtoInput
@@ -44032,6 +44129,7 @@ export namespace Prisma {
     codigo_referencia?: NullableStringFieldUpdateOperationsInput | string | null
     tipo_embalagem?: NullableStringFieldUpdateOperationsInput | string | null
     valor_produto?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    estoque?: IntFieldUpdateOperationsInput | number
     foto?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
     dt_inc?: DateTimeFieldUpdateOperationsInput | Date | string
     tb_fornecedor_campanha_produto?: tb_fornecedor_campanha_produtoUpdateManyWithoutTb_fornecedor_produtoNestedInput
@@ -44051,6 +44149,7 @@ export namespace Prisma {
     codigo_referencia?: NullableStringFieldUpdateOperationsInput | string | null
     tipo_embalagem?: NullableStringFieldUpdateOperationsInput | string | null
     valor_produto?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    estoque?: IntFieldUpdateOperationsInput | number
     foto?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
     dt_inc?: DateTimeFieldUpdateOperationsInput | Date | string
     tb_fornecedor_campanha_produto?: tb_fornecedor_campanha_produtoUncheckedUpdateManyWithoutTb_fornecedor_produtoNestedInput
@@ -45528,6 +45627,7 @@ export namespace Prisma {
     codigo_referencia?: string | null
     tipo_embalagem?: string | null
     valor_produto: Decimal | DecimalJsLike | number | string
+    estoque?: number
     foto?: Uint8Array | null
     dt_inc?: Date | string
   }
@@ -45542,6 +45642,7 @@ export namespace Prisma {
     codigo_referencia?: NullableStringFieldUpdateOperationsInput | string | null
     tipo_embalagem?: NullableStringFieldUpdateOperationsInput | string | null
     valor_produto?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    estoque?: IntFieldUpdateOperationsInput | number
     foto?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
     dt_inc?: DateTimeFieldUpdateOperationsInput | Date | string
     tb_fornecedor_campanha_produto?: tb_fornecedor_campanha_produtoUpdateManyWithoutTb_fornecedor_produtoNestedInput
@@ -45560,6 +45661,7 @@ export namespace Prisma {
     codigo_referencia?: NullableStringFieldUpdateOperationsInput | string | null
     tipo_embalagem?: NullableStringFieldUpdateOperationsInput | string | null
     valor_produto?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    estoque?: IntFieldUpdateOperationsInput | number
     foto?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
     dt_inc?: DateTimeFieldUpdateOperationsInput | Date | string
     tb_fornecedor_campanha_produto?: tb_fornecedor_campanha_produtoUncheckedUpdateManyWithoutTb_fornecedor_produtoNestedInput
@@ -45577,6 +45679,7 @@ export namespace Prisma {
     codigo_referencia?: NullableStringFieldUpdateOperationsInput | string | null
     tipo_embalagem?: NullableStringFieldUpdateOperationsInput | string | null
     valor_produto?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    estoque?: IntFieldUpdateOperationsInput | number
     foto?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
     dt_inc?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -45678,6 +45781,7 @@ export namespace Prisma {
     codigo_referencia?: string | null
     tipo_embalagem?: string | null
     valor_produto: Decimal | DecimalJsLike | number | string
+    estoque?: number
     foto?: Uint8Array | null
     dt_inc?: Date | string
   }
@@ -46017,6 +46121,7 @@ export namespace Prisma {
     codigo_referencia?: NullableStringFieldUpdateOperationsInput | string | null
     tipo_embalagem?: NullableStringFieldUpdateOperationsInput | string | null
     valor_produto?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    estoque?: IntFieldUpdateOperationsInput | number
     foto?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
     dt_inc?: DateTimeFieldUpdateOperationsInput | Date | string
     tb_fornecedor_campanha_produto?: tb_fornecedor_campanha_produtoUpdateManyWithoutTb_fornecedor_produtoNestedInput
@@ -46035,6 +46140,7 @@ export namespace Prisma {
     codigo_referencia?: NullableStringFieldUpdateOperationsInput | string | null
     tipo_embalagem?: NullableStringFieldUpdateOperationsInput | string | null
     valor_produto?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    estoque?: IntFieldUpdateOperationsInput | number
     foto?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
     dt_inc?: DateTimeFieldUpdateOperationsInput | Date | string
     tb_fornecedor_campanha_produto?: tb_fornecedor_campanha_produtoUncheckedUpdateManyWithoutTb_fornecedor_produtoNestedInput
@@ -46052,6 +46158,7 @@ export namespace Prisma {
     codigo_referencia?: NullableStringFieldUpdateOperationsInput | string | null
     tipo_embalagem?: NullableStringFieldUpdateOperationsInput | string | null
     valor_produto?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    estoque?: IntFieldUpdateOperationsInput | number
     foto?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
     dt_inc?: DateTimeFieldUpdateOperationsInput | Date | string
   }

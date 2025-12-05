@@ -19,7 +19,7 @@ function serializeBigInt(obj) {
 /**
  * Busca as condições comerciais do fornecedor para o estado da loja
  * @param {number|string} id_fornecedor
- * @param {number|string} id_loja_ou_usuario 
+ * @param {number|string} id_loja_ou_usuario
  */
 async function buscarCondicoesComerciais(id_fornecedor, id_loja_ou_usuario) {
   try {
@@ -114,7 +114,11 @@ export const getPedidoById = async (req, res) => {
         tb_fornecedor: { select: { id: true, nome_fantasia: true } },
         tb_loja: { select: { id: true, nome_fantasia: true } },
         tb_sistema_usuario: { select: { id: true, nome: true, email: true } },
-        tb_pedido_item: true,
+        tb_pedido_item: {
+          include: {
+            tb_fornecedor_produto: { select: { id: true, produto: true } },
+          },
+        },
       },
     });
 
@@ -145,7 +149,7 @@ export const createPedido = async (req, res) => {
       chave_nota_fiscal,
       canal,
       is_televenda,
-      itens, 
+      itens,
     } = req.body;
 
     if (!id_usuario || !id_conta || !id_fornecedor || !id_loja)
