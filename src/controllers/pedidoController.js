@@ -92,6 +92,11 @@ export const getPedidos = async (req, res) => {
         tb_fornecedor: { select: { id: true, nome_fantasia: true } },
         tb_loja: { select: { id: true, nome_fantasia: true } },
         tb_sistema_usuario: { select: { id: true, nome: true, email: true } },
+        tb_pedido_item: {
+          include: {
+            tb_fornecedor_produto: { select: { id: true, produto: true } },
+          },
+        },
       },
     });
 

@@ -45,13 +45,21 @@ export const getUsuarioById = async (req, res) => {
       include: {
         tb_sistema_conta: { select: { id: true, nm_conta: true } },
         tb_sistema_usuario_perfil: true,
+        tb_loja: { select: { id: true, nome_fantasia: true } },
+        tb_fornecedor: { select: { id: true, nome_fantasia: true } },
       },
     });
 
     if (!usuario)
       return res.status(404).json({ message: "Usuário não encontrado" });
 
-    res.json(serializeBigInt(usuario));
+    const usuarioComIds = {
+      ...usuario,
+      id_loja: usuario.tb_loja?.[0]?.id || null,
+      id_fornecedor: usuario.tb_fornecedor?.[0]?.id || null,
+    };
+
+    res.json(serializeBigInt(usuarioComIds));
   } catch (error) {
     res.status(500).json({
       error: "Erro ao buscar usuário",
@@ -339,57 +347,114 @@ export const deleteUsuario = async (req, res) => {
     if (!usuarioExistente)
       return res.status(404).json({ message: "Usuário não encontrado" });
 
-    // Deleta em cascata: perfil → loja/fornecedor → usuário
-    try {
-      // Deleta os perfis do usuário
-      await prisma.tb_sistema_usuario_perfil.deleteMany({
-        where: { id_usuario: id },
-      });
-
-      // Deleta lojas associadas ao usuário
-      const lojasDoUsuario = await prisma.tb_loja.findMany({
-        where: { id_usuario: BigInt(id) },
-      });
-
-      for (const loja of lojasDoUsuario) {
-        // Deleta endereços da loja
-        await prisma.tb_loja_endereco.deleteMany({
-          where: { id_loja: loja.id },
+    // Se já está inativo, deleta permanentemente
+    if (usuarioExistente.ativo === false) {
+      try {
+        // Deleta os perfis do usuário
+        await prisma.tb_sistema_usuario_perfil.deleteMany({
+          where: { id_usuario: id },
         });
-        // Deleta contatos da loja
-        await prisma.tb_loja_contato.deleteMany({
-          where: { id_loja: loja.id },
+
+        // Busca lojas e fornecedores do usuário
+        const lojasDoUsuario = await prisma.tb_loja.findMany({
+          where: { id_usuario: BigInt(id) },
         });
-        // Deleta a loja
-        await prisma.tb_loja.delete({ where: { id: loja.id } });
+
+        const fornecedoresDoUsuario = await prisma.tb_fornecedor.findMany({
+          where: { id_usuario: BigInt(id) },
+        });
+
+        // Deleta itens de pedidos relacionados
+        await prisma.tb_pedido_item.deleteMany({
+          where: { id_usuario: id },
+        });
+
+        // Deleta pedidos relacionados
+        await prisma.tb_pedido.deleteMany({
+          where: { id_usuario: id },
+        });
+
+        // Deleta dados de lojas
+        for (const loja of lojasDoUsuario) {
+          await prisma.tb_loja_cashback_detalhes.deleteMany({
+            where: { id_loja: loja.id },
+          });
+          await prisma.tb_loja_cashback.deleteMany({
+            where: { id_loja: loja.id },
+          });
+          await prisma.tb_loja_endereco.deleteMany({
+            where: { id_loja: loja.id },
+          });
+          await prisma.tb_loja_contato.deleteMany({
+            where: { id_loja: loja.id },
+          });
+          await prisma.tb_loja.delete({ where: { id: loja.id } });
+        }
+
+        // Deleta dados de fornecedores
+        for (const fornecedor of fornecedoresDoUsuario) {
+          await prisma.tb_fornecedor_campanha_produto.deleteMany({
+            where: {
+              id_campanha: {
+                in: (
+                  await prisma.tb_fornecedor_campanha.findMany({
+                    where: { id_fornecedor: fornecedor.id },
+                    select: { id: true },
+                  })
+                ).map((c) => c.id),
+              },
+            },
+          });
+          await prisma.tb_fornecedor_campanha.deleteMany({
+            where: { id_fornecedor: fornecedor.id },
+          });
+          await prisma.tb_fornecedor_produto.deleteMany({
+            where: { id_fornecedor: fornecedor.id },
+          });
+          await prisma.tb_fornecedor_condicao.deleteMany({
+            where: { id_fornecedor: fornecedor.id },
+          });
+          await prisma.tb_fornecedor_endereco.deleteMany({
+            where: { id_fornecedor: fornecedor.id },
+          });
+          await prisma.tb_fornecedor_contato.deleteMany({
+            where: { id_fornecedor: fornecedor.id },
+          });
+          await prisma.tb_fornecedor.delete({ where: { id: fornecedor.id } });
+        }
+
+        // Deleta o usuário
+        await prisma.tb_sistema_usuario.delete({ where: { id } });
+
+        return res.json({
+          message: "Usuário removido permanentemente do sistema",
+        });
+      } catch (deleteError) {
+        return res.status(500).json({
+          error:
+            "Não foi possível excluir o usuário devido a dependências no sistema",
+          details: deleteError.message,
+        });
       }
-
-      // Deleta fornecedores associados ao usuário
-      const fornecedoresDoUsuario = await prisma.tb_fornecedor.findMany({
-        where: { id_usuario: BigInt(id) },
-      });
-
-      for (const fornecedor of fornecedoresDoUsuario) {
-        // Deleta endereços do fornecedor
-        await prisma.tb_fornecedor_endereco.deleteMany({
-          where: { id_fornecedor: fornecedor.id },
-        });
-        // Deleta contatos do fornecedor
-        await prisma.tb_fornecedor_contato.deleteMany({
-          where: { id_fornecedor: fornecedor.id },
-        });
-        // Deleta o fornecedor
-        await prisma.tb_fornecedor.delete({ where: { id: fornecedor.id } });
-      }
-    } catch (cascadeError) {
-      console.error("Erro ao deletar dados associados:", cascadeError);
-      // Continua mesmo se falhar em alguma relação
     }
 
-    // Finalmente deleta o usuário
-    await prisma.tb_sistema_usuario.delete({ where: { id } });
+    // Se está ativo, apenas desativa (exclusão lógica)
+    await prisma.tb_sistema_usuario.update({
+      where: { id },
+      data: { ativo: false },
+    });
 
-    res.json({ message: "Usuário removido com sucesso" });
+    await prisma.tb_loja.updateMany({
+      where: { id_usuario: BigInt(id) },
+      data: { ativo: false },
+    });
+
+    await prisma.tb_fornecedor.updateMany({
+      where: { id_usuario: BigInt(id) },
+      data: { ativo: false },
+    });
+
+    res.json({ message: "Usuário desativado com sucesso" });
   } catch (error) {
     console.error("Erro ao deletar usuário:", error);
     res.status(500).json({
