@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../generated/prisma/index.js";
 import bcrypt from "bcryptjs";
 const prisma = new PrismaClient();
 
@@ -60,11 +60,58 @@ export const createLoja = async (req, res) => {
       contato,
     } = req.body;
 
-    if (!id_conta || !razao_social || !cnpj || !email_loja) {
+    // Validação de campos obrigatórios
+    const camposAusentes = [];
+    if (!id_conta) camposAusentes.push("id_conta");
+    if (!razao_social) camposAusentes.push("razao_social");
+    if (!cnpj) camposAusentes.push("cnpj");
+    if (!email_loja) camposAusentes.push("email_loja");
+
+    if (camposAusentes.length > 0) {
       return res.status(400).json({
-        message:
-          "Campos obrigatórios ausentes: id_conta, razao_social, cnpj, email_loja",
+        message: "Validação falhou: campos obrigatórios ausentes",
+        fields: camposAusentes,
+        error: `Os seguintes campos são obrigatórios: ${camposAusentes.join(
+          ", "
+        )}. Todos devem ser fornecidos para criar uma loja.`,
       });
+    }
+
+    // Validação de formato de email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email_loja)) {
+      return res.status(400).json({
+        message: "Formato de e-mail inválido",
+        field: "email_loja",
+        value: email_loja,
+        expected: "Um endereço de e-mail válido (exemplo: loja@empresa.com)",
+      });
+    }
+
+    // Validação de formato de CNPJ (básica - apenas dígitos e comprimento)
+    const cnpjLimpo = cnpj.replace(/\D/g, "");
+    if (cnpjLimpo.length !== 14) {
+      return res.status(400).json({
+        message: "Formato de CNPJ inválido",
+        field: "cnpj",
+        value: cnpj,
+        expected:
+          "Um CNPJ válido com 14 dígitos (formato: XX.XXX.XXX/XXXX-XX ou apenas dígitos)",
+      });
+    }
+
+    // Validação de formato de telefone (se fornecido)
+    if (telefone) {
+      const telefoneLimpo = telefone.replace(/\D/g, "");
+      if (telefoneLimpo.length < 10 || telefoneLimpo.length > 11) {
+        return res.status(400).json({
+          message: "Formato de telefone inválido",
+          field: "telefone",
+          value: telefone,
+          expected:
+            "Um telefone válido com 10 ou 11 dígitos (formato: (XX) XXXXX-XXXX ou (XX) XXXX-XXXX)",
+        });
+      }
     }
 
     let id_usuario_criado = req.body.id_usuario || 1;
@@ -81,7 +128,10 @@ export const createLoja = async (req, res) => {
 
       if (usuarioExistente) {
         return res.status(400).json({
-          message: "Já existe um usuário com este e-mail.",
+          message: "E-mail já cadastrado",
+          field: "email_loja",
+          value: email_loja,
+          error: `Já existe um usuário com o e-mail "${email_loja}" nesta conta. Utilize um e-mail diferente ou não gere novas credenciais.`,
         });
       }
 
